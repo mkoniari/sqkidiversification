@@ -16,7 +16,10 @@ public class Main {
  /*
 	 * The initial parameter 
 	 */
+	//on Macbook
 	static String myIndex="/Users/Research/research/Data/FT.Diversity.Index";
+	//on windows
+	//static String myIndex="J:\\Sadegh-Personal\\research\\data\\FT.Diversity.Index";
 	static int cuttoff=100;
 	static int topicNumber;
 	static double lambda;

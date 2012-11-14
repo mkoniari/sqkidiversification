@@ -45,8 +45,9 @@ public class XQUAD {
 			HashMap<Integer, Double> tmpList = new HashMap<Integer, Double>();
 			List<String> tmpAspects= new ArrayList<String>();
 			
-			//TODO fix this part to suit xquad this part
+			//TODO fix this part to suit xquad this part on windows
 			for (Map.Entry<Integer, Double> entry : docIDmapScore.entrySet()) {
+				
 				double divscore = 0d;
 				docID = entry.getKey();
 				divscore = xquadScore(docIDmapScore.get(docID),
@@ -54,6 +55,7 @@ public class XQUAD {
 				tmpList.put(docID, divscore);
 			}
 
+			
 			docID = findNext(tmpList);
 			// System.err.println(docID + "   " + tmpList.get(docID));
 			put(docID, tmpList.get(docID));
@@ -98,7 +100,15 @@ public class XQUAD {
 		rank++;
 
 	}
-
+    private void subtopicWeight(AspectsList aspectsList){
+	
+	int subtopicsize=aspectsList.getAspect().size();
+	for (int i = 0; i < subtopicsize; i++) {
+		aspectsList.getAspect().get(i).setImportance(1.0/subtopicsize);
+	}
+	
+	
+}
 	// Calculate maximum dissimilarity of current doc with retrieved docs
 	private double calcMaxDis(int docID) {
 
@@ -130,14 +140,12 @@ public class XQUAD {
 		return sim;
 	}
 
-	private double xquadScore(double sim, double disim) {
+	private double xquadScore(double sim, double coverage) {
 
 		double score = 0d;
-		if (sim < 0d) {
-			score = lambda * sim + (1 - lambda) * disim;
-		} else {
-			score = lambda * sim - (1 - lambda) * disim;
-		}
+		
+			score = (1-lambda) * sim + lambda * coverage ;
+		
 		return score;
 	}
 }
