@@ -118,7 +118,7 @@ public class Retrieve {
 		if (Main.divMethod.equalsIgnoreCase("xquad")){
 			ReadAspects readAspects= new ReadAspects(Main.aspectFile, _topicNumber);
 			AspectsList aspectsList = readAspects.read();
-			EXQUAD xquad =new EXQUAD(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID,aspectsList); 
+			XQUAD xquad =new XQUAD(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID,aspectsList); 
 			finalList=xquad.run();
 		}
 		
