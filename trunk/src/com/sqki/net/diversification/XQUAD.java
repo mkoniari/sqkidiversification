@@ -11,7 +11,7 @@ import com.sqki.net.util.AspectsList;
 import com.sqki.net.util.Result;
 import com.sqki.net.util.ResultList;
 
-public class EXQUAD {
+public class XQUAD {
 
 	int rank = 1;
 	static double lambda = Main.getLambda();
@@ -23,7 +23,7 @@ public class EXQUAD {
 	HashMap<Integer, Integer> ranKmapDocID = new HashMap<Integer, Integer>();
 	AspectsList aspectsList = new AspectsList();
 
-	public EXQUAD(HashMap<Integer, String[]> docIDmapTV,
+	public XQUAD(HashMap<Integer, String[]> docIDmapTV,
 			HashMap<Integer, String> docIDMN, HashMap<Integer, Double> docIDMS,
 			HashMap<Integer, Integer> docIDMR,
 			HashMap<Integer, Integer> ranKMDID, AspectsList _aspectsList) {
