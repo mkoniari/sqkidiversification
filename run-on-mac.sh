@@ -1,1 +1,1 @@
-time java -Xms100M -Xmx4000M -Djava.library.path=/Users/Research/research/Toolkits/indri-5.3/swig/obj/java/ -classpath ./bin:/Users/Research/research/Toolkits/indri-5.3/swig/obj/java/ com.sqki.net.Main $1 $2 $:q3
+time java -Xms100M -Xmx4000M -Djava.library.path=/Users/Research/research/Toolkits/indri-5.3/swig/obj/java/ -classpath ./bin:/Users/Research/research/Toolkits/indri-5.3/swig/obj/java/ com.sqki.net.Main $1 $2 $3
