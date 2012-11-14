@@ -1,0 +1,10 @@
+******************************************************
+* This framework use for diversification of results  *
+*  Developed by Sadegh Kharazmi @ NICTA & RMIT       *
+*    email: sadegh.kharazmi@gmail.com                *
+******************************************************
+
+SQKIFRM is a framework to promote diversity using different methods.
+
+To run the program :
+./run.sh topic result lambda
