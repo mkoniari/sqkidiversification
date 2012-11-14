@@ -8,3 +8,12 @@ SQKIFRM is a framework to promote diversity using different methods.
 
 To run the program :
 ./run.sh topic result lambda
+
+
+issues :
+
+Fixed:
+- different lambda effect on MMR is fixed
+
+TODO :
+
