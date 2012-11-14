@@ -1,0 +1,82 @@
+<parameters>
+<query>
+<number>303i</number>
+<text>Hubble Telescope Achievements </text>
+</query>
+<query>
+<number>307i</number>
+<text>New Hydroelectric Projects </text>
+</query>
+<query>
+<number>322i</number>
+<text>International Art Crime </text>
+</query>
+<query>
+<number>326i</number>
+<text>Ferry Sinkings  </text>
+</query>
+<query>
+<number>339i</number>
+<text>Alzheimer Drug Treatment </text>
+</query>
+<query>
+<number>347i</number>
+<text>Wildlife Extinction </text>
+</query>
+<query>
+<number>352i</number>
+<text>British Chunnel impacts  </text>
+</query>
+<query>
+<number>353i</number>
+<text>Antarctic exploration</text>
+</query>
+<query>
+<number>357i</number>
+<text>territorial waters dispute </text>
+</query>
+<query>
+<number>362i</number>
+<text>human smuggling </text>
+</query>
+<query>
+<number>365i</number>
+<text>El Nino   </text>
+</query>
+<query>
+<number>366i</number>
+<text>commercial cyanide uses </text>
+</query>
+<query>
+<number>387i</number>
+<text>radioactive waste </text>
+</query>
+<query>
+<number>392i</number>
+<text>robotics </text>
+</query>
+<query>
+<number>408i</number>
+<text>tropical storms </text>
+</query>
+<query>
+<number>414i</number>
+<text>Cuba sugar imports </text>
+</query>
+<query>
+<number>428i</number>
+<text>declining birth rates </text>
+</query>
+<query>
+<number>431i</number>
+<text>robotic technology </text>
+</query>
+<query>
+<number>438i</number>
+<text>tourism increase </text>
+</query>
+<query>
+<number>446i</number>
+<text>tourists violence </text>
+</query>
+</parameters>
