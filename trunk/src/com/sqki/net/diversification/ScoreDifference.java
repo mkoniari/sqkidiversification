@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-
+import java.util.Map;
 import com.sqki.net.Main;
 import com.sqki.net.util.Result;
 import com.sqki.net.util.ResultList;
@@ -22,9 +22,10 @@ public class ScoreDifference {
 	HashMap<Integer, Integer> docIDmapRank = new HashMap<Integer, Integer>();
 	HashMap<Integer, Integer> ranKmapDocID = new HashMap<Integer, Integer>();
 	HashMap<Integer,Double> docIDmapDiffScore=new HashMap<Integer, Double>();
+	HashMap<Integer,Integer> docIDmapDiffRankSort=new HashMap<Integer, Integer>();
+	HashMap<Integer,Integer> docIDmapDiffRank=new HashMap<Integer, Integer>();
 	
-	
-	public ScoreDifference(HashMap<Integer, String[]> docIDmapTV,
+    public ScoreDifference(HashMap<Integer, String[]> docIDmapTV,
 			HashMap<Integer, String> docIDMN, HashMap<Integer, Double> docIDMS,
 			HashMap<Integer, Integer> docIDMR,
 			HashMap<Integer, Integer> ranKMDID){
@@ -39,29 +40,25 @@ public class ScoreDifference {
 	
 	
 	public ResultList run(){
+	
 		
-		for (int i = 1; i < docIDmapScore.size(); i++) {
-			
-			if (i == 1) {
-				Result result= new Result();
-				int docId=ranKmapDocID.get(1);
-				result.setDocID(docId);
-				result.setDocName(docIDmapName.get(docId));
-				result.setRank(1);
-				result.setTopicNumber(Main.getTopicNumber());
-				result.setScore(docIDmapScore.get(docId));
-			}else {
-				Result result= new Result();
-				int docIdpervious=ranKmapDocID.get(i-1);
-				int docId=ranKmapDocID.get(i);
-				result.setDocID(docId);
-				result.setDocName(docIDmapName.get(docId));
-				result.setRank(i);
-				result.setTopicNumber(Main.getTopicNumber());
-				result.setScore(docIDmapScore.get(docId));
+		for (Integer i: docIDmapScore.keySet()){
+		    double dif=0.0d;
+			if (docIDmapRank.get(i) == 1) {
+			    dif=Math.abs(docIDmapScore.get(i));
+				
 			}
+			if (docIDmapRank.get(i) > 1) {
+				int prevDocRank=docIDmapRank.get(i)-1;
+				int prevDocID=ranKmapDocID.get(prevDocRank);
+				
+			    dif=diff(i,prevDocID);
+			}
+			
+			docIDmapDiffScore.put(i, dif);
 		}
-		Collections.sort(list);
+		
+		sorting(docIDmapDiffScore);
 		
 		return diverse;
 	}
@@ -69,50 +66,69 @@ public class ScoreDifference {
 	private void put(int docID){
 		
 		
+		Result tmpresult= new Result();
+		tmpresult.setRank(docIDmapDiffRank.get(docID));
+		tmpresult.setDocName(docIDmapName.get(docID));
+		tmpresult.setScore(docIDmapScore.get(docID));
+		tmpresult.setTopicNumber(Main.getTopicNumber());
+		tmpresult.setDocID(docID);
+		tmpresult.setRunID(docIDmapRank.get(docID).toString());
+		removedocID(docID);
+		diverse.getResultList().add(tmpresult);
+		
 	}
     public double diff(int docID, int docIDprevious){
     	
-    	double diff=absdiff(docIDmapScore.get(docID),docIDmapScore.get(docIDprevious));
+    	double diff=0d;
+    	
+    	diff=absdiff(docIDmapScore.get(docID),docIDmapScore.get(docIDprevious));
     	
     	
     	return diff;
     }
     
-    public LinkedHashMap sortHashMapByValuesD(HashMap passedMap) {
-        List mapKeys = new ArrayList(passedMap.keySet());
-        List mapValues = new ArrayList(passedMap.values());
-        Collections.sort(mapValues);
-        Collections.sort(mapKeys);
-            
-        LinkedHashMap sortedMap = 
-            new LinkedHashMap();
-        
-        Iterator valueIt = mapValues.iterator();
-        while (valueIt.hasNext()) {
-            Object val = valueIt.next();
-            Iterator keyIt = mapKeys.iterator();
-            
-            while (keyIt.hasNext()) {
-                Object key = keyIt.next();
-                String comp1 = passedMap.get(key).toString();
-                String comp2 = val.toString();
-                
-                if (comp1.equals(comp2)){
-                    passedMap.remove(key);
-                    mapKeys.remove(key);
-                    sortedMap.put((String)key, (Double)val);
-                    break;
-                }
-
-            }
-
-        }
-        return sortedMap;
+    private void removedocID(int docid) {
+    	ranKmapDocID.remove(docIDmapRank.get(docid));
+    	docIDmapTermVector.remove(docid);
+		docIDmapName.remove(docid);
+		docIDmapRank.remove(docid);
+		docIDmapScore.remove(docid);
+		
+		}
+    
+    public void firstDoc(int docID){
+    	docIDmapDiffRank.put(docID, 1);
+    	docIDmapDiffScore.put(docID, docIDmapScore.get(docID));
+    	put(docID);
+    	
+    }
+    
+    public void sorting(HashMap<Integer, Double> unsorted){
+		
+    	int rank=1;
+    	while (!unsorted.isEmpty()){
+    		double max=-1d;
+    		int id=-1;
+    		for (Integer i: unsorted.keySet()){
+    	        if (unsorted.get(i)>max){
+    	        	max=unsorted.get(i);
+    	        	id=i;
+    	        }
+    		}
+    	    System.err.println(id + "...."+ rank+ "......"+max);
+    		docIDmapDiffRankSort.put(id, rank);
+    		rank++;
+    		unsorted.remove(id);
+    	}
+    	
+    	
+    	
     }
     
     public double absdiff(double fscore,double sscore){
 		double diff=0.0d;
 		diff=Math.abs(fscore-sscore);
+		//System.err.println(diff);
 		return diff;
 	}
 	
