@@ -21,13 +21,16 @@ public class Main {
 	//on windows
 	//static String myIndex="J:\\Sadegh-Personal\\research\\data\\FT.Diversity.Index";
 	static int cuttoff=100;
+	public static int getCuttoff() {
+		return cuttoff;
+	}
 	static int topicNumber;
 	static double lambda;
 	static String aspectFile="aspect/TREC.aspects";
 	
 
 	static String resultFile;
-	static String divMethod="MMR";
+	static String divMethod="scorediff";
 	
 	  public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub

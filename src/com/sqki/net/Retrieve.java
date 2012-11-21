@@ -121,6 +121,11 @@ public class Retrieve {
 			XQUAD xquad =new XQUAD(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID,aspectsList); 
 			finalList=xquad.run();
 		}
+		if (Main.divMethod.equalsIgnoreCase("scorediff")){
+			ScoreDifference scoreDifference= new ScoreDifference(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
+			finalList=scoreDifference.run();
+		}
+
 		
 		return finalList;
 	}
