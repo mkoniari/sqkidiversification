@@ -17,7 +17,8 @@ public class Main {
 	 * The initial parameter 
 	 */
 	//on Macbook
-	static String myIndex="/Users/Research/research/Data/FT.Diversity.Index";
+	//static String myIndex="/Users/Research/research/Data/FT.Diversity.Index";
+	static String myIndex;
 	//on windows
 	//static String myIndex="J:\\Sadegh-Personal\\research\\data\\FT.Diversity.Index";
 	static int cuttoff=100;
@@ -38,6 +39,7 @@ public class Main {
 		  topicNumber = Integer.parseInt(args[0]);
 		  resultFile=args[1];
 		  lambda=Double.parseDouble(args[2]);
+		  myIndex=args[3];
 		  
 //		  resultFile="baseline/result.okapi";
 //		  topicNumber=303;
