@@ -24,6 +24,7 @@ public class ScoreDifference {
 	HashMap<Integer,Double> docIDmapDiffScore=new HashMap<Integer, Double>();
 	HashMap<Integer,Integer> docIDmapDiffRankSort=new HashMap<Integer, Integer>();
 	HashMap<Integer,Integer> docIDmapDiffRank=new HashMap<Integer, Integer>();
+	HashMap<Integer,Integer> ranKmapdocIDDiff=new HashMap<Integer, Integer>();
 	
     public ScoreDifference(HashMap<Integer, String[]> docIDmapTV,
 			HashMap<Integer, String> docIDMN, HashMap<Integer, Double> docIDMS,
@@ -60,14 +61,23 @@ public class ScoreDifference {
 		
 		sorting(docIDmapDiffScore);
 		
+//		for (Integer i: docIDmapDiffRankSort.keySet()){
+//			put(i,docIDmapDiffRankSort.get(i));
+//			
+//		}
+		
+		for (int i = 1; i <= Main.getCuttoff(); i++) {
+			
+			put (ranKmapdocIDDiff.get(i),i);
+		}
 		return diverse;
 	}
     
-	private void put(int docID){
+	private void put(int docID,int rank){
 		
 		
 		Result tmpresult= new Result();
-		tmpresult.setRank(docIDmapDiffRank.get(docID));
+		tmpresult.setRank(rank);
 		tmpresult.setDocName(docIDmapName.get(docID));
 		tmpresult.setScore(docIDmapScore.get(docID));
 		tmpresult.setTopicNumber(Main.getTopicNumber());
@@ -96,12 +106,7 @@ public class ScoreDifference {
 		
 		}
     
-    public void firstDoc(int docID){
-    	docIDmapDiffRank.put(docID, 1);
-    	docIDmapDiffScore.put(docID, docIDmapScore.get(docID));
-    	put(docID);
-    	
-    }
+  
     
     public void sorting(HashMap<Integer, Double> unsorted){
 		
@@ -117,6 +122,7 @@ public class ScoreDifference {
     		}
     	    System.err.println(id + "...."+ rank+ "......"+max);
     		docIDmapDiffRankSort.put(id, rank);
+    		ranKmapdocIDDiff.put(rank, id);
     		rank++;
     		unsorted.remove(id);
     	}
