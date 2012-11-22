@@ -120,7 +120,7 @@ public class ScoreDifference {
     	        	id=i;
     	        }
     		}
-    	    System.err.println(id + "...."+ rank+ "......"+max);
+    	   // System.err.println(id + "...."+ rank+ "......"+max);
     		docIDmapDiffRankSort.put(id, rank);
     		ranKmapdocIDDiff.put(rank, id);
     		rank++;
