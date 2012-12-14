@@ -17,7 +17,10 @@ public class Main {
 	 * The initial parameter 
 	 */
 	//on Macbook
-	static String myIndex="/Users/Research/research/Data/FT.Diversity.Index";
+	//MAC Index
+	//static String myIndex="/Users/Research/research/Data/FT.Diversity.Index";
+	//HPC index
+	static String myIndex="/scratch/sadegh/DATA/TRECDATA/CluewebCatBIndex-StopWordRemoval-WithDoc";
 	//static String myIndex;
 	//on windows
 	//static String myIndex="J:\\Sadegh-Personal\\research\\data\\FT.Diversity.Index";
@@ -27,7 +30,7 @@ public class Main {
 	}
 	static int topicNumber;
 	static double lambda;
-	static String aspectFile="aspect/TREC.aspects";
+	static String aspectFile="/scratch/sadegh/source/sqkidiversification/aspect/TREC.aspects";
 	
 
 	static String resultFile;
