@@ -6,6 +6,11 @@
 
 SQKIFRM is a framework to promote diversity using different methods.
 
+Technical Details:
+
+baseline need to be at the same cutt off in the code.
+
+
 To run the program :
 ./run.sh topic result lambda
 
