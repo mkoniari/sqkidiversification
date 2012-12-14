@@ -1,0 +1,5 @@
+
+for i in {1..150}
+do
+./create.qsub.run.for.query.pl $i > qsub-files/$i-qsub 
+done
