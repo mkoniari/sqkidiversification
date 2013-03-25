@@ -10,6 +10,12 @@ Technical Details:
 
 baseline need to be at the same cutt off in the code.
 
+To compile the code :
+
+You have first get in to HPC nodes then try to compile that
+
+How to get in HPC node : qsub -l nodes=1,walltime=1:00:00 -I
+How to compile : ./compile
 
 To run the program :
 ./run.sh topic result lambda
