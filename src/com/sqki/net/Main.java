@@ -18,13 +18,13 @@ public class Main {
 	 */
 	//on Macbook
 	//MAC Index
-	//static String myIndex="/Users/Research/research/Data/FT.Diversity.Index";
+	static String myIndex="/Users/Research/research/Data/FT.Diversity.Index";
 	//HPC index
 
 		//static String myIndex="/scratch/sadegh/DATA/TRECDATA/CluewebCatBIndex-StopWordRemoval-WithDoc";
 		
 		//Lighter HPC index about 167 G
-		static String myIndex="/scratch/sadegh/DATA/TRECDATA/CluewebCatBIndex";
+		//static String myIndex="/scratch/sadegh/DATA/TRECDATA/CluewebCatBIndex";
 	//static String myIndex;
 	//on windows
 	//static String myIndex="J:\\Sadegh-Personal\\research\\data\\FT.Diversity.Index";
@@ -35,9 +35,11 @@ public class Main {
 	}
 	static int topicNumber;
 	static double lambda;
+	
 	static String aspectFile="/scratch/sadegh/source/sqkidiversification/aspect/TREC.aspects";
 	
-
+	static String query;
+	
 	static String resultFile;
 	
 //	static String divMethod="scorediff";
@@ -50,6 +52,7 @@ public class Main {
 		  resultFile=args[1];
 		  lambda=Double.parseDouble(args[2]);
 		  cuttoff=Integer.parseInt(args[3]);
+		  query=args[4];
 		//  myIndex=args[3];
 		  
 //		  resultFile="baseline/result.okapi";
@@ -64,6 +67,9 @@ public class Main {
 	}
 
 	// Getter and Setter to use the parameter
+		public static String getQuery() {
+			return query;
+		}
 	public static int getTopicNumber() {
 		return topicNumber;
 	}

@@ -35,7 +35,7 @@ public class MMR {
 		
 	}
     public ResultList run() {
-		// Initialise first rank document
+    	// Initialise first rank document
 		int docID = ranKmapDocID.get(1);
 		put(docID,docIDmapScore.get(docID));
 	   //Iteration to find the next suitable document
@@ -46,7 +46,10 @@ public class MMR {
 			for (Map.Entry<Integer, Double> entry : docIDmapScore.entrySet()) {
 				double divscore=0d;
 				docID=entry.getKey();
-				divscore=mmrScore(docIDmapScore.get(docID), calcMaxDis(docID));
+				// For calculating the score using initial retrieval score
+				//divscore=mmrScore(docIDmapScore.get(docID), calcMaxDis(docID));
+				//For Calculating the similarity and dissimilarity based on Cosine
+				divscore=mmrScore(calcSimilarity(Main.getQuery(), docID), calcMaxDis(docID));
 				tmpList.put(docID, divscore);	
 			}
 			
@@ -91,6 +94,8 @@ public class MMR {
 		tmpresult.setDocID(docID);
 		removedocID(docID);
 		diverse.getResultList().add(tmpresult);
+		
+		//System.err.println("Score : " + score + " :: " + rank );
 		rank++;
 	
 	}
@@ -120,14 +125,25 @@ public class MMR {
 		sim=cosine.similarity();
 		return sim;
 	}
+	
+   private double calcSimilarity(String q, int docID2){
+		
+		double sim=0d;
+		String[] query = q.split(" ");
+		Cosine cosine= new Cosine(query, docIDmapTermVector.get(docID2));
+		sim=cosine.similarity();
+		return sim;
+	}
 	private double mmrScore(double sim, double disim) {
-
+		
+		//System.err.println("lambda Value is : " + lambda);
 		double score = 0d;
 		if (sim < 0d) {
 			score = lambda * sim + (1 - lambda) * disim;
 		} else {
 			score = lambda * sim - (1 - lambda) * disim;
 		}
+		System.err.println("sim : " + sim + " dis : "+ disim);
 		return score;
 	}
 
