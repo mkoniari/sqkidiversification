@@ -1,0 +1,8 @@
+#! /usr/bin/perl
+
+for (my $i=1; $i<151; $i++){
+my $cuttoff=`cat baseline/tesTclueweb | grep "^$i " | wc -l`;
+my $command=`./create.qsub.run.for.query.pl $i 0.5  $cuttoff > qsub-files/$i-mmr-0.5-qsub`;
+print $command;
+}
+
