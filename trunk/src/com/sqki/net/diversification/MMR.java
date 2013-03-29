@@ -139,7 +139,7 @@ public class MMR {
 		//System.err.println("lambda Value is : " + lambda);
 		double score = 0d;
 		if (sim < 0d) {
-			score = lambda * sim + (1 - lambda) * disim;
+			score = lambda * sim - (1 - lambda) * disim;
 		} else {
 			score = lambda * sim - (1 - lambda) * disim;
 		}
