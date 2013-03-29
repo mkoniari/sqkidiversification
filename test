@@ -1,0 +1,23 @@
+#! /usr/bin/perl
+
+sub trim($);
+open (TP,"topic.trec") or die "cannot open trec topic file \n";
+while (my $l=<TP>){
+	my $ll=trim($l);
+	if ($ll=~/(\d+):(.*)/){
+		my $query=$2;
+		my $topic=$1;
+		if ($topic eq $ARGV[0]){
+			print "$2\n";
+		}
+	}	 
+}
+
+close TP;
+sub trim($)
+{
+	my $string = shift;
+	$string =~ s/^\s+//;
+	$string =~ s/\s+$//;
+	return $string;
+}
