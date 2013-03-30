@@ -28,3 +28,5 @@ Fixed:
 
 TODO :
 
+due to negative and unnormalized initial retrieval score lamda is not working properly. what i did is I calculate the cosine similarity score as
+similarity score and disimilarity score.
