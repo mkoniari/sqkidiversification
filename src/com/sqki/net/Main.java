@@ -18,10 +18,10 @@ public class Main {
 	 */
 	//on Macbook
 	//MAC Index
-	static String myIndex="/Users/Research/research/Data/FT.Diversity.Index";
+	//static String myIndex="/Users/Research/research/Data/FT.Diversity.Index";
 	
 	//HPC index
- 	//static String myIndex="/scratch/sadegh/DATA/TRECDATA/CluewebCatBIndex-StopWordRemoval-WithDoc";
+ 	static String myIndex="/scratch/sadegh/DATA/TRECDATA/CluewebCatBIndex-StopWordRemoval-WithDoc";
 		
 	//Lighter HPC index about 167 G
 	//static String myIndex="/scratch/sadegh/DATA/TRECDATA/CluewebCatBIndex";
