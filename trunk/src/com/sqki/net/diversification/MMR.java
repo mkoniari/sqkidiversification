@@ -20,7 +20,9 @@ public class MMR {
 	HashMap<Integer, Double> docIDmapScore = new HashMap<Integer, Double>();
 	HashMap<Integer, Integer> docIDmapRank = new HashMap<Integer, Integer>();
 	HashMap<Integer, Integer> ranKmapDocID = new HashMap<Integer, Integer>();
-
+	
+	
+	
 	public MMR(HashMap<Integer, String[]> docIDmapTV,
 			HashMap<Integer, String> docIDMN, HashMap<Integer, Double> docIDMS,
 			HashMap<Integer, Integer> docIDMR,
@@ -29,12 +31,14 @@ public class MMR {
 
 		docIDmapTermVector = docIDmapTV;
 		docIDmapName = docIDMN;
-		docIDmapScore = docIDMS;
 		docIDmapRank = docIDMR;
 		ranKmapDocID = ranKMDID;
+		docIDmapScore = normalise(docIDMS);
+		
 		
 	}
-    public ResultList run() {
+    
+	public ResultList run() {
     	// Initialise first rank document
 		int docID = ranKmapDocID.get(1);
 		put(docID,docIDmapScore.get(docID));
@@ -47,9 +51,9 @@ public class MMR {
 				double divscore=0d;
 				docID=entry.getKey();
 				// For calculating the score using initial retrieval score
-				//divscore=mmrScore(docIDmapScore.get(docID), calcMaxDis(docID));
+				divscore=mmrScore(docIDmapScore.get(docID), calcMaxDis(docID));
 				//For Calculating the similarity and dissimilarity based on Cosine
-				divscore=mmrScore(calcSimilarity(Main.getQuery(), docID), calcMaxDis(docID));
+				//divscore=mmrScore(calcSimilarity(Main.getQuery(), docID), calcMaxDis(docID));
 				tmpList.put(docID, divscore);	
 			}
 			
@@ -138,13 +142,54 @@ public class MMR {
 		
 		//System.err.println("lambda Value is : " + lambda);
 		double score = 0d;
-		if (sim < 0d) {
-			score = lambda * sim + (1 - lambda) * disim;
-		} else {
+		
 			score = lambda * sim - (1 - lambda) * disim;
-		}
-		System.err.println("sim : " + sim + " dis : "+ disim);
+		
+		//System.err.println("sim : " + sim + " dis : "+ disim);
 		return score;
+	}
+	
+	private HashMap<Integer, Double> normalise(HashMap<Integer, Double> docIDMS) {
+		// TODO Auto-generated method stub
+		HashMap<Integer,Double> normalScore= new HashMap<Integer,Double>();
+		
+		double maxScore=docIDMS.get(ranKmapDocID.get(1));
+		double minScore=docIDMS.get(ranKmapDocID.get(ranKmapDocID.size()));
+		double normalizeScore=0d;
+		
+		System.err.println(maxScore+" *"+ minScore + " * " + ranKmapDocID.size());
+		// add loop on 
+		Iterator it = docIDMS.entrySet().iterator();
+
+		while (it.hasNext()) {
+
+		Map.Entry entry = (Map.Entry) it.next();
+
+		Integer key = (Integer)entry.getKey();
+
+		double val = (Double)entry.getValue();
+
+		normalizeScore=(val-minScore)/(maxScore-minScore);
+		normalScore.put(key, normalizeScore);
+
+		}
+		
+		//DEBUG
+		it = normalScore.entrySet().iterator();
+
+		while (it.hasNext()) {
+
+		Map.Entry entry = (Map.Entry) it.next();
+
+		Integer key = (Integer)entry.getKey();
+
+		double val = (Double)entry.getValue();
+
+		System.err.println("ID : " + key + "  score : "+ val);
+
+		}
+		
+		return normalScore;
 	}
 
 }
