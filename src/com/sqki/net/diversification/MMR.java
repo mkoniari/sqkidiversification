@@ -157,7 +157,7 @@ public class MMR {
 		double minScore=docIDMS.get(ranKmapDocID.get(ranKmapDocID.size()));
 		double normalizeScore=0d;
 		
-		System.err.println(maxScore+" *"+ minScore + " * " + ranKmapDocID.size());
+		//System.err.println(maxScore+" *"+ minScore + " * " + ranKmapDocID.size());
 		// add loop on 
 		Iterator it = docIDMS.entrySet().iterator();
 
@@ -174,20 +174,7 @@ public class MMR {
 
 		}
 		
-		//DEBUG
-		it = normalScore.entrySet().iterator();
-
-		while (it.hasNext()) {
-
-		Map.Entry entry = (Map.Entry) it.next();
-
-		Integer key = (Integer)entry.getKey();
-
-		double val = (Double)entry.getValue();
-
-		System.err.println("ID : " + key + "  score : "+ val);
-
-		}
+		
 		
 		return normalScore;
 	}
