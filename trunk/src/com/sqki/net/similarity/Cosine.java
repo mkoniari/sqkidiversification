@@ -38,7 +38,7 @@ public class Cosine {
 		}
 		
 		cosineSim=sclar/(norm1*norm2);
-		System.err.println(cosineSim);
+		//System.err.println(cosineSim);
 		return cosineSim;
 	}
 	private HashMap<String,Integer> docVector(String[] doc){
