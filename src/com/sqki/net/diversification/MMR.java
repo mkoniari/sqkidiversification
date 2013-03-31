@@ -145,7 +145,7 @@ public class MMR {
 		
 			score = lambda * sim - (1 - lambda) * disim;
 		
-		//System.err.println("sim : " + sim + " dis : "+ disim);
+		System.err.println("score : " + score);
 		return score;
 	}
 	
