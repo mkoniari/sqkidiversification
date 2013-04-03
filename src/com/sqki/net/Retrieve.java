@@ -125,7 +125,12 @@ public class Retrieve {
 			ScoreDifference scoreDifference= new ScoreDifference(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
 			finalList=scoreDifference.run();
 		}
+		if (Main.divMethod.equalsIgnoreCase("correlation")){
+			Correlation corr= new Correlation(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
+			corr.run();
+		}
 
+		
 		
 		return finalList;
 	}
