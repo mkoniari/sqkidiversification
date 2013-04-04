@@ -143,7 +143,11 @@ public class MMR {
 		//System.err.println("lambda Value is : " + lambda);
 		double score = 0d;
 		
-			score = lambda * sim - (1 - lambda) * disim;
+		// Linear combination of relevance and novelty	
+		//score = lambda * sim - (1 - lambda) * disim;
+		
+		// just considering novelty
+		score=disim;
 		
 		System.err.println("score : " + score);
 		return score;
