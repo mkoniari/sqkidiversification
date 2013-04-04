@@ -43,8 +43,8 @@ public class Main {
 	static String resultFile;
 	
 //	static String divMethod="scorediff";
-//	static String divMethod="mmr";
-	static String divMethod="correlation";
+ 	static String divMethod="mmr";
+//	static String divMethod="correlation";
 	  
 	  
 		public static void main(String[] args) throws Exception {
