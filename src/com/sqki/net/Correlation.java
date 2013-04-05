@@ -51,13 +51,13 @@ public class Correlation {
 				
 				System.err.println(docIDmapName.size());
 				System.out.println(Main.topicNumber +" Q0 "+ docIDmapName.get(ranKmapDocID.get(1))+" 1 "+ docIDmapScore.get(ranKmapDocID.get(1))+" 1  Correlation");
-				for (int i = 2; i < Main.cuttoff; i++) {
+				for (int i = 2; i < Main.cuttoff+1; i++) {
 					
 					//TODO This one should print score similarity between two 
 					//documents and the difference between two documents
 					System.err.println("");
 					documentID=ranKmapDocID.get(i);
-					docScorediff=docIDmapScore.get(documentID)-docIDmapScore.get(ranKmapDocID.get(i-1));
+					docScorediff=Math.abs(docIDmapScore.get(documentID)-docIDmapScore.get(ranKmapDocID.get(i-1)))/Math.abs(docIDmapScore.get(ranKmapDocID.get(i-1)));
 					doc1=docIDmapTermVector.get(documentID);
 					doc2=docIDmapTermVector.get(ranKmapDocID.get(i-1));
 					cosine= new Cosine(doc1, doc2);

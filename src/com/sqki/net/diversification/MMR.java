@@ -144,10 +144,10 @@ public class MMR {
 		double score = 0d;
 		
 		// Linear combination of relevance and novelty	
-		//score = lambda * sim - (1 - lambda) * disim;
+		score = lambda * sim - (1 - lambda) * disim;
 		
-		// just considering novelty
-		score=disim;
+		// just considering novelty ? Is there any chance to have nonlinear combination
+		//score=disim;
 		
 		System.err.println("score : " + score);
 		return score;
