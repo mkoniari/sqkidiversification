@@ -3,9 +3,9 @@
 #PBS -M sadegh.kharazmi@gmail.com
 #PBS -m abe
 cd $PBS_WORKDIR
-rm src/com/sqki/net/*.class
+rm /scratch/sadegh/source/sqkidiversification/src/com/sqki/net/*.class
 
-rm src/com/sqki/net/similarity/*.class
-rm src/com/sqki/net/diversification/*.class
+rm /scratch/sadegh/source/sqkidiversification/src/com/sqki/net/similarity/*.class
+rm /scratch/sadegh/source/sqkidiversification/src/com/sqki/net/diversification/*.class
 
 javac -cp /scratch/sadegh/Toolkits/indri-5.3/swig/obj/java/:/scratch/sadegh/source/sqkidiversification/src/ /scratch/sadegh/source/sqkidiversification/src/com/sqki/net/Main.java
