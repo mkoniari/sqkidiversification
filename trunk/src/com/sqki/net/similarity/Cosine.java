@@ -92,7 +92,7 @@ public class Cosine {
 
 	public double weight(String[] doc, String term) {
 
-		double w=1;
+		double w=0;
 		for (int i = 0; i < doc.length; i++) {
 			if (doc[i].equals(term)){
 				w++;
