@@ -158,7 +158,7 @@ public class WindowMMR {
 					int min=i - windowSize;
 					int max=i + windowSize;
 					if (min<0) min=0;
-					if (max>doc.length) max=doc.length;
+					if (max>doc.length) max=doc.length-1;
 					for (int k = min; k < max; k++) {
 
 						if (!doc[k].equals(null)) {
