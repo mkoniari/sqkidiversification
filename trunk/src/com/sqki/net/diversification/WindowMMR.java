@@ -194,7 +194,7 @@ public class WindowMMR {
 		// combination
 		// score=disim;
 
-		System.err.println("score : " + score);
+		//System.err.println("score : " + score);
 		return score;
 	}
 
