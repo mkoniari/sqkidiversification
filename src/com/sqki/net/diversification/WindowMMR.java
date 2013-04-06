@@ -20,7 +20,7 @@ public class WindowMMR {
 	HashMap<Integer, Double> docIDmapScore = new HashMap<Integer, Double>();
 	HashMap<Integer, Integer> docIDmapRank = new HashMap<Integer, Integer>();
 	HashMap<Integer, Integer> ranKmapDocID = new HashMap<Integer, Integer>();
-	final int WSZ = 4;
+	final int WSZ = 10;
 
 	public WindowMMR(HashMap<Integer, String[]> docIDmapTV,
 			HashMap<Integer, String> docIDMN, HashMap<Integer, Double> docIDMS,
