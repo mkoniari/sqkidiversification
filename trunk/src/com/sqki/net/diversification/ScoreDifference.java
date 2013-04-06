@@ -14,7 +14,7 @@ import com.sqki.net.util.ResultList;
 public class ScoreDifference {
 	
 	int rank=1;
-	static double lambda=Main.getLambda();
+	//static double lambda=Main.getLambda();
 	ResultList diverse = new ResultList();
 	HashMap<Integer, String[]> docIDmapTermVector = new HashMap<Integer, String[]>();
 	HashMap<Integer, String> docIDmapName = new HashMap<Integer, String>();
@@ -34,9 +34,10 @@ public class ScoreDifference {
 		
 		docIDmapTermVector = docIDmapTV;
 		docIDmapName = docIDMN;
-		docIDmapScore = docIDMS;
+		
 		docIDmapRank = docIDMR;
 		ranKmapDocID = ranKMDID;
+		docIDmapScore = normalise(docIDMS);
 	}
 	
 	
@@ -144,4 +145,35 @@ public class ScoreDifference {
 		return diff;
 		
 	}
+	
+	private HashMap<Integer, Double> normalise(HashMap<Integer, Double> docIDMS) {
+		// TODO Auto-generated method stub
+		HashMap<Integer,Double> normalScore= new HashMap<Integer,Double>();
+		
+		double maxScore=docIDMS.get(ranKmapDocID.get(1));
+		double minScore=docIDMS.get(ranKmapDocID.get(ranKmapDocID.size()));
+		double normalizeScore=0d;
+		
+		//System.err.println(maxScore+" *"+ minScore + " * " + ranKmapDocID.size());
+		// add loop on 
+		Iterator it = docIDMS.entrySet().iterator();
+
+		while (it.hasNext()) {
+
+		Map.Entry entry = (Map.Entry) it.next();
+
+		Integer key = (Integer)entry.getKey();
+
+		double val = (Double)entry.getValue();
+
+		normalizeScore=(val-minScore)/(maxScore-minScore);
+		normalScore.put(key, normalizeScore);
+
+		}
+		
+		
+		
+		return normalScore;
+	}
+
 }

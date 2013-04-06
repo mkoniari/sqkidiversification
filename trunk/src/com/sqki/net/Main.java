@@ -18,10 +18,12 @@ public class Main {
 	 */
 	//on Macbook
 	//MAC Index
-	//static String myIndex="/Users/Research/research/Data/FT.Diversity.Index";
+	static String myIndex="/Users/Research/research/Data/FT.Diversity.Index";
 	
+	//HOMEPC INDEX
+	//static String myIndex="/home/sqki/Dropbox/Research/IR/DATA/SAMPLE_CLUEWEB/index";
 	//HPC index
- 	static String myIndex="/scratch/sadegh/DATA/TRECDATA/CluewebCatBIndex-StopWordRemoval-WithDoc";
+ 	//static String myIndex="/scratch/sadegh/DATA/TRECDATA/CluewebCatBIndex-StopWordRemoval-WithDoc";
 		
 	//Lighter HPC index about 167 G
 	//static String myIndex="/scratch/sadegh/DATA/TRECDATA/CluewebCatBIndex";
@@ -43,12 +45,25 @@ public class Main {
 	static String resultFile;
 	
 //	static String divMethod="scorediff";
- 	static String divMethod="mmr";
+//	static String divMethod="scorediffRank";
+// 	static String divMethod="mmr";
 //	static String divMethod="correlation";
+//	static String divMethod="xquad";
+	static String divMethod="windowMMR";
+	
 	  
 	  
 		public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
+			
+		/*
+		 * Instruction to user 
+		 * arg 1 : topic number
+		 * arg 2 : result file 
+		 * arg 3 : lambda value
+		 * arg 4 : cutt off
+		 * arg 5 : query String	
+		 */
         // Parameter : topic result lambda
 		  topicNumber = Integer.parseInt(args[0]);
 		  resultFile=args[1];

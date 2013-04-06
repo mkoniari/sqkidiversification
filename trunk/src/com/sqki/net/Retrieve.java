@@ -129,8 +129,15 @@ public class Retrieve {
 			Correlation corr= new Correlation(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
 			corr.run();
 		}
-
+		if (Main.divMethod.equalsIgnoreCase("scorediffRank")){
+			RankScoreDifference rankScoreDifference= new RankScoreDifference(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
+			finalList=rankScoreDifference.run();
+		}
 		
+		if (Main.divMethod.equalsIgnoreCase("windowMMR")){
+			WindowMMR wmmr= new WindowMMR(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
+			finalList=wmmr.run();
+		}
 		
 		return finalList;
 	}
