@@ -155,7 +155,11 @@ public class WindowMMR {
 
 				if (q[j].equalsIgnoreCase(doc[i])) {
 					
-					for (int k = i - windowSize; k < i + windowSize; k++) {
+					int min=i - windowSize;
+					int max=i + windowSize;
+					if (min<0) min=0;
+					if (max>doc.length) max=doc.length;
+					for (int k = min; k < max; k++) {
 
 						if (!doc[k].equals(null)) {
 							finalDoc = finalDoc + doc[k];
