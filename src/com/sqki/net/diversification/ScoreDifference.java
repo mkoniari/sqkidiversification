@@ -92,7 +92,7 @@ public class ScoreDifference {
     	
     	double diff=0d;
     	
-    	diff=absdiff(docIDmapScore.get(docID),docIDmapScore.get(docIDprevious));
+    	diff=reldiff(docIDmapScore.get(docID),docIDmapScore.get(docIDprevious));
     	
     	
     	return diff;
