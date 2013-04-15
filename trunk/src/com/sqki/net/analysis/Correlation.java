@@ -1,4 +1,4 @@
-package com.sqki.net;
+package com.sqki.net.analysis;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -7,6 +7,7 @@ import java.util.Map;
 import com.sqki.net.similarity.Cosine;
 import com.sqki.net.util.Result;
 import com.sqki.net.util.ResultList;
+import com.sqki.net.Main;
 
 public class Correlation {
 
@@ -50,8 +51,8 @@ public class Correlation {
 				String[] doc2;
 				
 				System.err.println(docIDmapName.size());
-				System.out.println(Main.topicNumber +" Q0 "+ docIDmapName.get(ranKmapDocID.get(1))+" 1 "+ docIDmapScore.get(ranKmapDocID.get(1))+" 1  Correlation");
-				for (int i = 2; i < Main.cuttoff; i++) {
+				System.out.println(Main.getTopicNumber() +" Q0 "+ docIDmapName.get(ranKmapDocID.get(1))+" 1 "+ docIDmapScore.get(ranKmapDocID.get(1))+" 1  Correlation");
+				for (int i = 2; i < Main.getCuttoff(); i++) {
 					
 					//TODO This one should print score similarity between two 
 					//documents and the difference between two documents
@@ -62,7 +63,7 @@ public class Correlation {
 					doc2=docIDmapTermVector.get(ranKmapDocID.get(i-1));
 					cosine= new Cosine(doc1, doc2);
 					docSim=cosine.similarity();
-					System.out.println(Main.topicNumber +" Q0 "+ docIDmapName.get(ranKmapDocID.get(i))+" "+i+" "+ docScorediff+" "+docSim +"  Correlation");
+					System.out.println(Main.getTopicNumber() +" Q0 "+ docIDmapName.get(ranKmapDocID.get(i))+" "+i+" "+ docScorediff+" "+docSim +"  Correlation");
 					
 				}
 				
