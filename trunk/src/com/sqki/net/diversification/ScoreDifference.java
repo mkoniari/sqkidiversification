@@ -37,8 +37,9 @@ public class ScoreDifference {
 		
 		docIDmapRank = docIDMR;
 		ranKmapDocID = ranKMDID;
-		docIDmapScore = normalise(docIDMS);
-	}
+		//docIDmapScore = normalise(docIDMS);
+		docIDmapScore=docIDMS;	
+    }
 	
 	
 	public ResultList run(){
