@@ -111,22 +111,55 @@ public class Retrieve {
 
 	}
 	
+	private void retrieveDocPropNoIndex(){
+		String[] names = new String[Main.cuttoff];
+        double[] scores=new double[Main.cuttoff];
+        int[] ranks= new int[Main.cuttoff];
+        int[] runids= new int[Main.cuttoff];
+        
+        for (int i = 0; i < nondiverse.getResultList().size(); i++) {
+			names[i]=   nondiverse.getResultList().get(i).getDocName();
+			scores[i]=  nondiverse.getResultList().get(i).getScore();
+			ranks[i]=   nondiverse.getResultList().get(i).getRank();
+			runids[i]=   nondiverse.getResultList().get(i).getRank();
+			
+		}
+		
+        for (int docid = 0; docid < Main.cuttoff; docid++) {
+			docIDmapName.put(docid, names[docid]);
+			docIDmapScore.put(docid, scores[docid]);
+			docIDmapRank.put(docid, ranks[docid]);
+			ranKmapDocID.put(ranks[docid], docid);
+			docIDmapRunID.put(docid, runids[docid]);
+		}
+        
+        if (docIDmapScore.containsKey(-1) || docIDmapRank.containsKey(-1)) {
+			System.out
+					.println("Prop No IndexThere is problem in assining docId to Score or rank... please check the source code or result file");
+			System.exit(1);
+		}
+	}
+	
 	public ResultList run() throws Exception{
 		ResultList finalList= new ResultList();
 		readResultFile();
-		retrieveDocProp();
+		
+		
 		if (Main.divMethod.equalsIgnoreCase("mmr")){
+			retrieveDocProp();
 			MMR mmr= new MMR(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
 			finalList=mmr.run();
 		}
 		
 		if (Main.divMethod.equalsIgnoreCase("xquad")){
+			retrieveDocProp();
 			ReadAspects readAspects= new ReadAspects(Main.aspectFile, _topicNumber);
 			AspectsList aspectsList = readAspects.read();
 			XQUAD xquad =new XQUAD(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID,aspectsList); 
 			finalList=xquad.run();
 		}
 		if (Main.divMethod.equalsIgnoreCase("scorediff")){
+			retrieveDocPropNoIndex();
 			ScoreDifference scoreDifference= new ScoreDifference(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
 			finalList=scoreDifference.run();
 		}
@@ -135,11 +168,13 @@ public class Retrieve {
 			corr.run();
 		}
 		if (Main.divMethod.equalsIgnoreCase("scorediffRank")){
+			retrieveDocPropNoIndex();
 			RankScoreDifference rankScoreDifference= new RankScoreDifference(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
 			finalList=rankScoreDifference.run();
 		}
 		
 		if (Main.divMethod.equalsIgnoreCase("windowMMR")){
+			retrieveDocProp();
 			WindowMMR wmmr= new WindowMMR(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
 			finalList=wmmr.run();
 		}

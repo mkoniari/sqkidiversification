@@ -26,7 +26,7 @@ public class RankScoreDifference {
 	int rank = 1;
 	// static double lambda=Main.getLambda();
 	ResultList diverse = new ResultList();
-	HashMap<Integer, String[]> docIDmapTermVector = new HashMap<Integer, String[]>();
+	//HashMap<Integer, String[]> docIDmapTermVector = new HashMap<Integer, String[]>();
 	HashMap<Integer, String> docIDmapName = new HashMap<Integer, String>();
 	HashMap<Integer, Double> docIDmapScore = new HashMap<Integer, Double>();
 	HashMap<Integer, Integer> docIDmapRank = new HashMap<Integer, Integer>();
@@ -51,7 +51,7 @@ public class RankScoreDifference {
 			HashMap<Integer, Integer> ranKMDID) {
 		// TODO Constructor
 
-		docIDmapTermVector = docIDmapTV;
+		//docIDmapTermVector = docIDmapTV;
 		docIDmapName = docIDMN;
 		docIDmapRank = docIDMR;
 		
@@ -153,7 +153,7 @@ public class RankScoreDifference {
 
 	private void removedocID(int docid) {
 		ranKmapDocID.remove(docIDmapRank.get(docid));
-		docIDmapTermVector.remove(docid);
+		//docIDmapTermVector.remove(docid);
 		docIDmapName.remove(docid);
 		docIDmapRank.remove(docid);
 		docIDmapScore.remove(docid);
