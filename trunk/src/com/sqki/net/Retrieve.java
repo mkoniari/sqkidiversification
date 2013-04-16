@@ -33,6 +33,7 @@ public class Retrieve {
 	HashMap<Integer, Double> docIDmapScore = new HashMap<Integer, Double>();
 	HashMap<Integer, Integer> docIDmapRank = new HashMap<Integer, Integer>();
 	HashMap<Integer, Integer> ranKmapDocID = new HashMap<Integer, Integer>();
+	HashMap<Integer,Integer> docIDmapRunID= new HashMap<Integer, Integer>();
 	QueryEnvironment env = new QueryEnvironment();
 	ResultList nondiverse= new ResultList();
 
@@ -57,12 +58,15 @@ public class Retrieve {
         String[] names = new String[Main.cuttoff];
         double[] scores=new double[Main.cuttoff];
         int[] ranks= new int[Main.cuttoff];
+        int[] runids= new int[Main.cuttoff];
         
         // Assigning names to array
         for (int i = 0; i < nondiverse.getResultList().size(); i++) {
 			names[i]=   nondiverse.getResultList().get(i).getDocName();
 			scores[i]=  nondiverse.getResultList().get(i).getScore();
 			ranks[i]=   nondiverse.getResultList().get(i).getRank();
+			runids[i]=   nondiverse.getResultList().get(i).getRank();
+			
 		}
         
 		
@@ -77,6 +81,7 @@ public class Retrieve {
 			docIDmapScore.put(docIDs[i], scores[i]);
 			docIDmapRank.put(docIDs[i], ranks[i]);
 			ranKmapDocID.put(ranks[i], docIDs[i]);
+			docIDmapRunID.put(docIDs[i], runids[i]);
 		}
 
 		/*
