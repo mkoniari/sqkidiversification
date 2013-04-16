@@ -31,13 +31,19 @@ public class RankScoreDifference {
 	HashMap<Integer, Double> docIDmapScore = new HashMap<Integer, Double>();
 	HashMap<Integer, Integer> docIDmapRank = new HashMap<Integer, Integer>();
 	HashMap<Integer, Integer> ranKmapDocID = new HashMap<Integer, Integer>();
+	
+	//Second Use
+	HashMap<Integer, Integer> docIDmapRankAPP = new HashMap<Integer, Integer>();
+	HashMap<Integer, Double> docIDmapRankDiffScoreAPP = new HashMap<Integer, Double>();
+	HashMap<Integer, String> docIDmapNameAPP = new HashMap<Integer, String>();
 
+	ScoreDifference sdff;
+	
+	//Needs in sorting
 	HashMap<Integer, Double> docIDmapRankDiffScore = new HashMap<Integer, Double>();
-	HashMap<Integer, Double> docIDmapDiffScore = new HashMap<Integer, Double>();
-
 	HashMap<Integer, Integer> docIDmapDiffRankSort = new HashMap<Integer, Integer>();
-	HashMap<Integer, Integer> docIDmapDiffRank = new HashMap<Integer, Integer>();
-	HashMap<Integer, Integer> ranKmapdocIDDiff = new HashMap<Integer, Integer>();
+	HashMap<Integer, Integer> ranKmapdocIDRankDiff = new HashMap<Integer, Integer>();
+	
 
 	public RankScoreDifference(HashMap<Integer, String[]> docIDmapTV,
 			HashMap<Integer, String> docIDMN, HashMap<Integer, Double> docIDMS,
@@ -46,100 +52,101 @@ public class RankScoreDifference {
 		// TODO Constructor
 
 		docIDmapTermVector = docIDmapTV;
-
 		docIDmapName = docIDMN;
 		docIDmapRank = docIDMR;
+		
 		ranKmapDocID = ranKMDID;
 		docIDmapScore = docIDMS;
+		
+		sdff= new ScoreDifference(docIDmapTV, docIDMN, docIDMS, docIDMR, ranKMDID);
+
+		
 	}
 
 	public ResultList run() {
-
-		// Initialisation of the
-		for (Integer i : docIDmapScore.keySet()) {
-			double dif = 0.0d;
-			if (docIDmapRank.get(i) == 1) {
-				dif = Math.abs(docIDmapScore.get(i));
-
+		
+		//DEBUG
+		
+		
+		
+		
+		//Initializing a new object
+		
+		
+		
+		 Iterator it = docIDmapRank.entrySet().iterator();
+		    while (it.hasNext()) {
+		        Map.Entry pairs = (Map.Entry)it.next();
+		        Integer key = (Integer)pairs.getKey();
+				Integer val = (Integer)pairs.getValue();
+				//System.err.println(key + " " + val);
+				docIDmapRankAPP.put(key, val);
+		        
+			//	it.remove(); // avoids a ConcurrentModificationException
+		    }
+		
+		    it = docIDmapName.entrySet().iterator();
+		    while (it.hasNext()) {
+		        Map.Entry pairs = (Map.Entry)it.next();
+		        Integer key = (Integer)pairs.getKey();
+				String val = (String)pairs.getValue();
+				//System.err.println(key + " " + val);
+				docIDmapNameAPP.put(key, val);
+		        
+			//	it.remove(); // avoids a ConcurrentModificationException
+		    }
+		  
+		    
+		    ResultList result= new ResultList();
+		    result=sdff.run();
+		  
+		    
+		    
+		    for (int i = 0; i < result.getResultList().size(); i++) {
+				
+				int docid= result.getResultList().get(i).getDocID();
+				//System.err.println(docid);
+				double nscore=(1d/docIDmapRankAPP.get(docid))+(1d/result.getResultList().get(i).getRank());
+				System.err.println(1d/docIDmapRankAPP.get(docid));
+				docIDmapRankDiffScore.put(docid,nscore);
+				
 			}
-			if (docIDmapRank.get(i) > 1) {
-				int prevDocRank = docIDmapRank.get(i) - 1;
-				int prevDocID = ranKmapDocID.get(prevDocRank);
-
-				dif = diff(i, prevDocID);
-			}
-
-			docIDmapDiffScore.put(i, dif);
+		    
+		
+		
+//		HashMap<Integer, Double> docIDmapDiffScore = new HashMap<Integer, Double>();
+//		
+//		HashMap<Integer, Integer> docIDmapDiffRank = new HashMap<Integer, Integer>();
+		
+		
+		
+		
+		sorting(docIDmapRankDiffScore);
+		
+		for (int i = 1; i <= Main.getCuttoff(); i++) {
+			
+			put (ranKmapdocIDRankDiff.get(i),i);
 		}
 		
-		
-
 		return diverse;
+		
 	}
 
-	private double diff(int docID, int docIDprevious) {
-
-		double diff = 0d;
-
-		diff = absdiff(docIDmapScore.get(docID),
-				docIDmapScore.get(docIDprevious));
-
-		return diff;
-	}
-
-	private double absdiff(double fscore, double sscore) {
-		double diff = 0.0d;
-		diff = Math.abs(fscore - sscore);
-		// System.err.println(diff);
-		return diff;
-	}
-
-	private double reldiff(double fscore, double sscore) {
-		double diff = 0.0d;
-		diff = Math.abs((fscore - sscore) / sscore);
-		return diff;
-
-	}
-
-	private HashMap<Integer, Double> normalise(HashMap<Integer, Double> docIDMS) {
-		// TODO Auto-generated method stub
-		HashMap<Integer, Double> normalScore = new HashMap<Integer, Double>();
-
-		double maxScore = docIDMS.get(ranKmapDocID.get(1));
-		double minScore = docIDMS.get(ranKmapDocID.get(ranKmapDocID.size()));
-		double normalizeScore = 0d;
-
-		// System.err.println(maxScore+" *"+ minScore + " * " +
-		// ranKmapDocID.size());
-		// add loop on
-		Iterator it = docIDMS.entrySet().iterator();
-
-		while (it.hasNext()) {
-
-			Map.Entry entry = (Map.Entry) it.next();
-
-			Integer key = (Integer) entry.getKey();
-
-			double val = (Double) entry.getValue();
-
-			normalizeScore = (val - minScore) / (maxScore - minScore);
-			normalScore.put(key, normalizeScore);
-
-		}
-
-		return normalScore;
-	}
+	
+	
+	
 
 	private void put(int docID, int rank) {
 		Result tmpresult = new Result();
 		tmpresult.setRank(rank);
 		tmpresult.setDocID(docID);
-		tmpresult.setDocName(docIDmapName.get(docID));
-		tmpresult.setScore(docIDmapScore.get(docID));
+		tmpresult.setDocName(docIDmapNameAPP.get(docID));
+		
+		tmpresult.setScore(docIDmapRankDiffScoreAPP.get(docID));
 		tmpresult.setTopicNumber(Main.getTopicNumber());
 
 		tmpresult.setRunID("Rank.Diff");
-		removedocID(docID);
+		//removedocID(docID);
 		diverse.getResultList().add(tmpresult);
 
 	}
@@ -167,7 +174,8 @@ public class RankScoreDifference {
 			}
 			// System.err.println(id + "...."+ rank+ "......"+max);
 			docIDmapDiffRankSort.put(id, rank);
-			ranKmapdocIDDiff.put(rank, id);
+			ranKmapdocIDRankDiff.put(rank, id);
+			docIDmapRankDiffScoreAPP.put(id, unsorted.get(id));
 			rank++;
 			unsorted.remove(id);
 		}

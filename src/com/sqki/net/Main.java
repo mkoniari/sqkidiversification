@@ -22,6 +22,7 @@ public class Main {
 	
 	//HOMEPC INDEX
 	//static String myIndex="/home/sqki/Dropbox/Research/IR/DATA/SAMPLE_CLUEWEB/index";
+	
 	//HPC index
  	static String myIndex="/scratch/sadegh/DATA/TRECDATA/CluewebCatBIndex-StopWordRemoval-WithDoc";
 		
@@ -44,8 +45,8 @@ public class Main {
 	
 	static String resultFile;
 	
-	static String divMethod="scorediff";
-//	static String divMethod="scorediffRank";
+//	static String divMethod="scorediff";
+	static String divMethod="scorediffRank";
 // 	static String divMethod="mmr";
 //	static String divMethod="correlation";
 //	static String divMethod="xquad";
