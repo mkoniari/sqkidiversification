@@ -59,7 +59,7 @@ public class RankScoreDifference {
 		docIDmapScore = docIDMS;
 		
 		sdff= new ScoreDifference(docIDmapTV, docIDMN, docIDMS, docIDMR, ranKMDID);
-
+		
 		
 	}
 
@@ -98,8 +98,10 @@ public class RankScoreDifference {
 		  
 		    
 		    ResultList result= new ResultList();
+		    System.err.println("done...");
 		    result=sdff.run();
-		  
+		   
+
 		    
 		    
 		    for (int i = 0; i < result.getResultList().size(); i++) {
@@ -107,7 +109,7 @@ public class RankScoreDifference {
 				int docid= result.getResultList().get(i).getDocID();
 				//System.err.println(docid);
 				double nscore=(1d/docIDmapRankAPP.get(docid))+(1d/result.getResultList().get(i).getRank());
-				System.err.println(1d/docIDmapRankAPP.get(docid));
+				//System.err.println(1d/docIDmapRankAPP.get(docid));
 				docIDmapRankDiffScore.put(docid,nscore);
 				
 			}
