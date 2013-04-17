@@ -49,7 +49,7 @@ public class Retrieve {
 	private void readResultFile(){
 		ReadResultFile readfile = new ReadResultFile(_resultFile,_topicNumber);
 		nondiverse=readfile.read();
-		
+		//System.err.println("**"+nondiverse.getResultList().size());
 	}
 	private void retrieveDocProp() throws Exception {
 
@@ -127,10 +127,12 @@ public class Retrieve {
 		
         for (int docid = 0; docid < Main.cuttoff; docid++) {
 			docIDmapName.put(docid, names[docid]);
+			//System.err.println(names[docid]);
 			docIDmapScore.put(docid, scores[docid]);
 			docIDmapRank.put(docid, ranks[docid]);
 			ranKmapDocID.put(ranks[docid], docid);
 			docIDmapRunID.put(docid, runids[docid]);
+			//System.err.println(docid);
 		}
         
         if (docIDmapScore.containsKey(-1) || docIDmapRank.containsKey(-1)) {

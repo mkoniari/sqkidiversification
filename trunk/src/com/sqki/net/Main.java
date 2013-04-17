@@ -38,6 +38,7 @@ public class Main {
 	}
 	static int topicNumber;
 	static double lambda;
+	static int windowSize;
 	
 	static String aspectFile="/scratch/sadegh/source/sqkidiversification/aspect/TREC.aspects";
 	
@@ -56,6 +57,7 @@ public class Main {
 	  
 		public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
+			System.err.println(" Diversification Method is : "+ divMethod);
 			
 		/*
 		 * Instruction to user 
@@ -64,6 +66,7 @@ public class Main {
 		 * arg 3 : lambda value
 		 * arg 4 : cutt off
 		 * arg 5 : query String	
+		 * arg 6: window size for correlation and window MMR
 		 */
         // Parameter : topic result lambda
 		  topicNumber = Integer.parseInt(args[0]);
@@ -71,6 +74,7 @@ public class Main {
 		  lambda=Double.parseDouble(args[2]);
 		  cuttoff=Integer.parseInt(args[3]);
 		  query=args[4];
+		  windowSize=Integer.parseInt(args[5]);
 		//  myIndex=args[3];
 		  
 //		  resultFile="baseline/result.okapi";

@@ -44,6 +44,7 @@ public class ReadResultFile {
 					Result result= new Result();
 					result.setTopicNumber(_topicNumber);
 					result.setRank(Integer.parseInt(words[3]));
+					//System.err.println(words[2].trim());
 					result.setDocName(words[2].trim());
 					result.setScore(Double.valueOf(words[4].trim()).doubleValue());
 					checkTopicNumber(result.getDocName(), result.getScore());
