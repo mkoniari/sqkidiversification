@@ -59,6 +59,7 @@ public class Main {
 		// TODO Auto-generated method stub
 			System.err.println(" Diversification Method is : "+ divMethod);
 			
+			
 		/*
 		 * Instruction to user 
 		 * arg 1 : topic number
@@ -79,7 +80,7 @@ public class Main {
 		  
 //		  resultFile="baseline/result.okapi";
 //		  topicNumber=303;
-		  
+		  System.err.println(" Topic Number is : "+ topicNumber);
 		  Retrieve retrieve= new Retrieve(myIndex, topicNumber, resultFile);
 		 // retrieve.checkToWork();
 		  PrintResult printResult= new PrintResult();

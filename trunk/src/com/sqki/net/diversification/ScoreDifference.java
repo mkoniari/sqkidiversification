@@ -1,5 +1,6 @@
 package com.sqki.net.diversification;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -37,6 +38,7 @@ public class ScoreDifference {
 		
 		docIDmapRank = docIDMR;
 		ranKmapDocID = ranKMDID;
+		
 		docIDmapScore = normalise(docIDMS);
 		//docIDmapScore=docIDMS;	
     }
@@ -151,9 +153,19 @@ public class ScoreDifference {
 		// TODO Auto-generated method stub
 		HashMap<Integer,Double> normalScore= new HashMap<Integer,Double>();
 		
+		//IMP TODO : Small Numer Here should implemented using Big Decimal
+		BigDecimal t= new BigDecimal(400);
+		System.err.println(0.00000000000000006/0.00005);
+		System.err.println(t);
+		
+		
 		double maxScore=docIDMS.get(ranKmapDocID.get(1));
 		double minScore=docIDMS.get(ranKmapDocID.get(ranKmapDocID.size()));
 		double normalizeScore=0d;
+		if(maxScore > 0){
+			normalScore=docIDMS;
+			
+		} else {
 		
 		//System.err.println(maxScore+" *"+ minScore + " * " + ranKmapDocID.size());
 		// add loop on 
@@ -172,7 +184,7 @@ public class ScoreDifference {
 
 		}
 		
-		
+		}
 		
 		return normalScore;
 	}
