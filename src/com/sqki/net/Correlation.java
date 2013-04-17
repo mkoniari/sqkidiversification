@@ -22,6 +22,7 @@ public class Correlation {
 	HashMap<Integer, Double> docIDmapScore = new HashMap<Integer, Double>();
 	HashMap<Integer, Integer> docIDmapRank = new HashMap<Integer, Integer>();
 	HashMap<Integer, Integer> ranKmapDocID = new HashMap<Integer, Integer>();
+	final int wsz=Main.windowSize;
 	
 	public Correlation(HashMap<Integer, String[]> docIDmapTV,
 			HashMap<Integer, String> docIDMN, HashMap<Integer, Double> docIDMS,
@@ -35,7 +36,35 @@ public class Correlation {
 		docIDmapScore = normalise(docIDMS);
 		
 	}
-	
+	private String[] windowString(String query, int docID, int windowSize) {
+
+		String[] doc = docIDmapTermVector.get(docID);
+		String finalDoc = " ";
+		String[] q = query.split(" ");
+
+		for (int i = 0; i < doc.length; i++) {
+			for (int j = 0; j < q.length; j++) {
+
+				if (q[j].equalsIgnoreCase(doc[i])) {
+					
+					int min=i - windowSize;
+					int max=i + windowSize;
+					if (min<0) min=0;
+					if (max>doc.length) max=doc.length-1;
+					for (int k = min; k < max; k++) {
+
+						if (!doc[k].equals(null)) {
+							finalDoc = finalDoc + doc[k];
+						}
+					}
+				}
+			}
+
+		}
+			
+		return finalDoc.split(" ");
+	}
+
 	public void run(){
 		
 		// Initialise first rank document
@@ -58,8 +87,12 @@ public class Correlation {
 					System.err.println("");
 					documentID=ranKmapDocID.get(i);
 					docScorediff=Math.abs(docIDmapScore.get(documentID)-docIDmapScore.get(ranKmapDocID.get(i-1)));
-					doc1=docIDmapTermVector.get(documentID);
-					doc2=docIDmapTermVector.get(ranKmapDocID.get(i-1));
+					// For Orginal Document Similarity Check
+//					doc1=docIDmapTermVector.get(documentID);
+//					doc2=docIDmapTermVector.get(ranKmapDocID.get(i-1));
+					// For Windows Based Similarity Check
+					doc1=windowString(Main.getQuery(),documentID,wsz);
+					doc2=windowString(Main.getQuery(),ranKmapDocID.get(i-1),wsz);
 					cosine= new Cosine(doc1, doc2);
 					docSim=cosine.similarity();
 					System.out.println(Main.topicNumber +" Q0 "+ docIDmapName.get(ranKmapDocID.get(i))+" "+i+" "+ docScorediff+" "+docSim +"  Correlation");

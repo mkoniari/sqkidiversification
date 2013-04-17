@@ -37,8 +37,8 @@ public class ScoreDifference {
 		
 		docIDmapRank = docIDMR;
 		ranKmapDocID = ranKMDID;
-		//docIDmapScore = normalise(docIDMS);
-		docIDmapScore=docIDMS;	
+		docIDmapScore = normalise(docIDMS);
+		//docIDmapScore=docIDMS;	
     }
 	
 	
@@ -48,7 +48,7 @@ public class ScoreDifference {
 		for (Integer i: docIDmapScore.keySet()){
 		    double dif=0.0d;
 			if (docIDmapRank.get(i) == 1) {
-			    dif=Math.abs(docIDmapScore.get(i));
+			    dif=Math.abs(docIDmapScore.get(i)*100);
 				
 			}
 			if (docIDmapRank.get(i) > 1) {
@@ -93,7 +93,7 @@ public class ScoreDifference {
     	
     	double diff=0d;
     	
-    	diff=reldiff(docIDmapScore.get(docID),docIDmapScore.get(docIDprevious));
+    	diff=reldiff(Math.abs(docIDmapScore.get(docID)),Math.abs(docIDmapScore.get(docIDprevious)));
     	
     	
     	return diff;
