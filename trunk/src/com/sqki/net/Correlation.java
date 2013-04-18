@@ -33,7 +33,8 @@ public class Correlation {
 		docIDmapName = docIDMN;
 		docIDmapRank = docIDMR;
 		ranKmapDocID = ranKMDID;
-		docIDmapScore = normalise(docIDMS);
+		//docIDmapScore = normalise(docIDMS);
+		docIDmapScore=docIDMS;
 		
 	}
 	private String[] windowString(String query, int docID, int windowSize) {
