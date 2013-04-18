@@ -43,7 +43,7 @@ public class Cosine {
 		
 		//cosineSim=sclar/(norm1*norm2);
 		cosineSim=cosine_similarity(doc1vector, doc2vector);
-		System.err.println(cosineSim + "*" +sclar +"*" + norm1 +"*"+ norm2);
+		//System.err.println(cosineSim + "*" +sclar +"*" + norm1 +"*"+ norm2);
 		
 		
 		return cosineSim;
@@ -86,7 +86,7 @@ public class Cosine {
 		}
 		
 		_eucDist = Math.sqrt(_eucDist);
-		System.err.println(_eucDist);
+		//System.err.println(_eucDist);
 		return _eucDist;
 	}
 

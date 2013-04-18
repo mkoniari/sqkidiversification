@@ -81,8 +81,8 @@ public class Correlation {
 				String[] doc1;
 				String[] doc2;
 				
-				System.err.println(docIDmapName.size());
-				System.out.println(Main.topicNumber +" Q0 "+ docIDmapName.get(ranKmapDocID.get(1))+" 1 "+ docIDmapScore.get(ranKmapDocID.get(1))+" 1  Correlation");
+				//System.err.println(docIDmapName.size());
+				//System.out.println(Main.topicNumber +" Q0 "+ docIDmapName.get(ranKmapDocID.get(1))+" 1 "+ docIDmapScore.get(ranKmapDocID.get(1))+" 1  Correlation");
 				for (int i = 2; i < Main.cuttoff+1; i++) {
 					
 					//TODO This one should print score similarity between two 
@@ -91,11 +91,11 @@ public class Correlation {
 					documentID=ranKmapDocID.get(i);
 					docScorediff=Math.abs(docIDmapScore.get(documentID)-docIDmapScore.get(ranKmapDocID.get(i-1)));
 					// For Orginal Document Similarity Check
-//					doc1=docIDmapTermVector.get(documentID);
-//					doc2=docIDmapTermVector.get(ranKmapDocID.get(i-1));
+					doc1=docIDmapTermVector.get(documentID);
+					doc2=docIDmapTermVector.get(ranKmapDocID.get(i-1));
 					// For Windows Based Similarity Check
-					doc1=windowString(Main.getQuery(),documentID,wsz);
-					doc2=windowString(Main.getQuery(),ranKmapDocID.get(i-1),wsz);
+//					doc1=windowString(Main.getQuery(),documentID,wsz);
+//					doc2=windowString(Main.getQuery(),ranKmapDocID.get(i-1),wsz);
 					
 					cosine= new Cosine(doc1, doc2);
 					
