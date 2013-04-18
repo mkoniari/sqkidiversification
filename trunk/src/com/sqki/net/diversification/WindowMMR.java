@@ -146,32 +146,36 @@ public class WindowMMR {
 
 	private String[] windowString(String query, int docID, int windowSize) {
 
+	      
 		String[] doc = docIDmapTermVector.get(docID);
 		String finalDoc = " ";
 		String[] q = query.split(" ");
 
 		for (int i = 0; i < doc.length; i++) {
+			//System.err.println(doc[i]);
 			for (int j = 0; j < q.length; j++) {
-
-				if (q[j].equalsIgnoreCase(doc[i])) {
 					
+				if (q[j].equalsIgnoreCase(doc[i])) {
+					//System.err.println("*");
+					System.err.println(docID+" "+q[j] +" "+ doc[i]);
 					int min=i - windowSize;
-					int max=i + windowSize;
+					int max=i + windowSize + 1;
 					if (min<0) min=0;
 					if (max>doc.length) max=doc.length-1;
 					for (int k = min; k < max; k++) {
 
 						if (!doc[k].equals(null)) {
-							finalDoc = finalDoc + doc[k];
+							finalDoc = finalDoc + " "+ doc[k];
 						}
 					}
 				}
 			}
 
 		}
-			
+			System.err.println("final doc is : " +finalDoc);
 		return finalDoc.split(" ");
 	}
+
 
 	private double calcSimilarity(String q, int docID2) {
 

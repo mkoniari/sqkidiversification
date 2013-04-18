@@ -38,11 +38,12 @@ public class Retrieve {
 	QueryEnvironment env = new QueryEnvironment();
 	ResultList nondiverse= new ResultList();
 	int ctfvalidity;
+	
 
 	public Retrieve(String myIndex, int topicNumber, String resultFile) {
 
 		// TODO Auto-generated constructor stub
-
+		
 		_myIndex = myIndex;
 		_topicNumber = topicNumber;
 		_resultFile=resultFile;

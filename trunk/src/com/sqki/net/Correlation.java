@@ -47,24 +47,25 @@ public class Correlation {
 		for (int i = 0; i < doc.length; i++) {
 			//System.err.println(doc[i]);
 			for (int j = 0; j < q.length; j++) {
-
+					
 				if (q[j].equalsIgnoreCase(doc[i])) {
 					//System.err.println("*");
+					System.err.println(docID+" "+q[j] +" "+ doc[i]);
 					int min=i - windowSize;
-					int max=i + windowSize;
+					int max=i + windowSize + 1;
 					if (min<0) min=0;
 					if (max>doc.length) max=doc.length-1;
 					for (int k = min; k < max; k++) {
 
 						if (!doc[k].equals(null)) {
-							finalDoc = finalDoc + doc[k];
+							finalDoc = finalDoc + " "+ doc[k];
 						}
 					}
 				}
 			}
 
 		}
-			
+			System.err.println("final doc is : " +finalDoc);
 		return finalDoc.split(" ");
 	}
 
@@ -91,11 +92,11 @@ public class Correlation {
 					documentID=ranKmapDocID.get(i);
 					docScorediff=Math.abs(docIDmapScore.get(documentID)-docIDmapScore.get(ranKmapDocID.get(i-1)));
 					// For Orginal Document Similarity Check
-					doc1=docIDmapTermVector.get(documentID);
-					doc2=docIDmapTermVector.get(ranKmapDocID.get(i-1));
+				//	doc1=docIDmapTermVector.get(documentID);
+				//	doc2=docIDmapTermVector.get(ranKmapDocID.get(i-1));
 					// For Windows Based Similarity Check
-//					doc1=windowString(Main.getQuery(),documentID,wsz);
-//					doc2=windowString(Main.getQuery(),ranKmapDocID.get(i-1),wsz);
+					doc1=windowString(Main.getQuery(),documentID,wsz);
+					doc2=windowString(Main.getQuery(),ranKmapDocID.get(i-1),wsz);
 					
 					cosine= new Cosine(doc1, doc2);
 					
