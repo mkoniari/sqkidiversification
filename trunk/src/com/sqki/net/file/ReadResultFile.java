@@ -16,20 +16,28 @@ public class ReadResultFile {
 	
 	String _resultFile;
 	int _topicNumber;
+	int ctf;
 	public ReadResultFile(String resultFile,int topicNumber) {
 		// TODO Auto-generated constructor stub
 		_resultFile=resultFile;
 		_topicNumber=topicNumber;
 	}
 	
-	
+	public int Cut_off(){
+		
+		
+		
+		return ctf;
+	}
 	public ResultList read() {
 
 		String name;
 		double score;
 		int rank;
 		ResultList resultList= new ResultList();
-	
+		
+		int ctfvalidity=1;
+		
 		try {
 			FileInputStream fstream = new FileInputStream(_resultFile);
 			DataInputStream in = new DataInputStream(fstream);
@@ -49,8 +57,10 @@ public class ReadResultFile {
 					result.setScore(Double.valueOf(words[4].trim()).doubleValue());
 					checkTopicNumber(result.getDocName(), result.getScore());
 					resultList.add(result);
+					ctfvalidity++;
 				}
 			}
+			
 			
 			in.close();
 		} catch (Exception e) {

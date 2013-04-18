@@ -143,6 +143,7 @@ public class ScoreDifference {
 	}
 	
 	public double reldiff(double fscore,double sscore){
+		System.err.println(fscore + " * "+ sscore );
 		double diff=0.0d;
 		diff=Math.abs((fscore-sscore)/sscore);
 		return diff;
