@@ -6,9 +6,9 @@ do
 
 # for trec adhoc runs I need to change
 
-for i in {101..150}
+for i in {1..150}
 do
-./create.qsub.run.for.query.pl $i $j 100 > qsub-files/$i-mmr-$j-qsub 
+./create.qsub.run.for.query.pl $i $j 100 10 > qsub-files/$i-mmr-$j-qsub 
 done
 
 done
