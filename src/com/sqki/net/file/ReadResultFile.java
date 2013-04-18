@@ -16,7 +16,7 @@ public class ReadResultFile {
 	
 	String _resultFile;
 	int _topicNumber;
-	int ctf;
+	int ctfvalidity;
 	public ReadResultFile(String resultFile,int topicNumber) {
 		// TODO Auto-generated constructor stub
 		_resultFile=resultFile;
@@ -27,7 +27,7 @@ public class ReadResultFile {
 		
 		
 		
-		return ctf;
+		return ctfvalidity;
 	}
 	public ResultList read() {
 
@@ -36,7 +36,7 @@ public class ReadResultFile {
 		int rank;
 		ResultList resultList= new ResultList();
 		
-		int ctfvalidity=1;
+		 ctfvalidity=0;
 		
 		try {
 			FileInputStream fstream = new FileInputStream(_resultFile);
