@@ -22,9 +22,9 @@ public class Cosine {
 
 		double cosineSim = 0d;
 		
-		double norm1 = euclideanDist(_doc1);
-		double norm2 = euclideanDist(_doc2);
-		
+//		double norm1 = euclideanDist(_doc1);
+//		double norm2 = euclideanDist(_doc2);
+//		
 		HashMap<String, Double> doc1vector= new HashMap<String, Double>();
 		HashMap<String, Double> doc2vector= new HashMap<String, Double>();
 		
@@ -67,7 +67,8 @@ public class Cosine {
 		
 		String cleanstr=""; 
 		for (int i = 0; i < doc.length; i++) {
-			if (!doc[i].equals("[OOV]")) cleanstr=cleanstr+" "+doc[i];
+			
+			if (!doc[i].contains("[OOV]")) cleanstr=cleanstr+" "+doc[i];
 		}
 		String[] cleanDoc=cleanstr.split(" ");
 		return cleanDoc;
