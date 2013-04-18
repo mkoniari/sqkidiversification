@@ -153,11 +153,6 @@ public class ScoreDifference {
 		// TODO Auto-generated method stub
 		HashMap<Integer,Double> normalScore= new HashMap<Integer,Double>();
 		
-		//IMP TODO : Small Numer Here should implemented using Big Decimal
-		BigDecimal t= new BigDecimal(400);
-		System.err.println(0.00000000000000006/0.00005);
-		System.err.println(t);
-		
 		
 		double maxScore=docIDMS.get(ranKmapDocID.get(1));
 		double minScore=docIDMS.get(ranKmapDocID.get(ranKmapDocID.size()));

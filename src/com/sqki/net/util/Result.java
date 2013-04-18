@@ -1,5 +1,7 @@
 package com.sqki.net.util;
 
+import java.math.BigDecimal;
+
 public class Result {
 
 	private int topicNumber;
