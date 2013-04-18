@@ -4,7 +4,7 @@ sub trim($);
 open (TP,"topic.trec.stemmed") or die "cannot open trec topic file \n";
 while (my $l=<TP>){
         my $ll=trim($l);
-        if ($ll=~/(\d+):(.*)/){
+        if ($ll=~/(\d+),(.*)/){
                 my $q=$2;
                 my $topic=$1;
                 if ($topic eq $ARGV[0]){

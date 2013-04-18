@@ -8,7 +8,11 @@ do
 
 for i in {1..150}
 do
-./create.qsub.run.for.query.pl $i $j 100 10 > qsub-files/$i-mmr-$j-qsub 
+for w in {1..100}
+do
+./create.qsub.run.for.query.pl $i $j 100 $w > qsub-files/$i-mmr-$j-qsub-$w 
+done
+
 done
 
 done
