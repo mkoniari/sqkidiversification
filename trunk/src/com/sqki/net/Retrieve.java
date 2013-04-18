@@ -54,6 +54,7 @@ public class Retrieve {
 		nondiverse=readfile.read();
 		ctfvalidity=readfile.Cut_off();
 		Main.setCuttoff(ctfvalidity);
+		//System.err.println(ctfvalidity);
 		//System.err.println("**"+nondiverse.getResultList().size());
 	}
 	private void retrieveDocProp() throws Exception {

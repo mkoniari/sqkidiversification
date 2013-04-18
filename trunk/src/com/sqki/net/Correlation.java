@@ -85,7 +85,7 @@ public class Correlation {
 					
 					//TODO This one should print score similarity between two 
 					//documents and the difference between two documents
-					System.err.println("");
+					//System.err.println(ranKmapDocID.size());
 					documentID=ranKmapDocID.get(i);
 					docScorediff=Math.abs(docIDmapScore.get(documentID)-docIDmapScore.get(ranKmapDocID.get(i-1)));
 					// For Orginal Document Similarity Check
