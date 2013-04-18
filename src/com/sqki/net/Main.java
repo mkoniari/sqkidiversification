@@ -47,9 +47,9 @@ public class Main {
 	static String resultFile;
 	
 //	static String divMethod="scorediff";
-	static String divMethod="scorediffRank";
+//	static String divMethod="scorediffRank";
 // 	static String divMethod="mmr";
-//	static String divMethod="correlation";
+	static String divMethod="correlation";
 //	static String divMethod="xquad";
 //	static String divMethod="windowMMR";
 	
