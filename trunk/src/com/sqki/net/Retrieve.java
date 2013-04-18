@@ -1,5 +1,6 @@
 package com.sqki.net;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +31,7 @@ public class Retrieve {
 	int[] docIDs;
 	HashMap<Integer, String[]> docIDmapTermVector = new HashMap<Integer, String[]>();
 	HashMap<Integer, String> docIDmapName = new HashMap<Integer, String>();
-	HashMap<Integer, Double> docIDmapScore = new HashMap<Integer, Double>();
+	HashMap<Integer,Double> docIDmapScore = new HashMap<Integer, Double>();
 	HashMap<Integer, Integer> docIDmapRank = new HashMap<Integer, Integer>();
 	HashMap<Integer, Integer> ranKmapDocID = new HashMap<Integer, Integer>();
 	HashMap<Integer,Integer> docIDmapRunID= new HashMap<Integer, Integer>();
@@ -56,7 +57,7 @@ public class Retrieve {
 		env.addIndex(_myIndex);
         DocumentVector[] documentVector;
         String[] names = new String[Main.cuttoff];
-        double[] scores=new double[Main.cuttoff];
+        Double[] scores=new Double[Main.cuttoff];
         int[] ranks= new int[Main.cuttoff];
         int[] runids= new int[Main.cuttoff];
         
@@ -113,7 +114,7 @@ public class Retrieve {
 	
 	private void retrieveDocPropNoIndex(){
 		String[] names = new String[Main.cuttoff];
-        double[] scores=new double[Main.cuttoff];
+        Double[] scores=new Double[Main.cuttoff];
         int[] ranks= new int[Main.cuttoff];
         int[] runids= new int[Main.cuttoff];
         
