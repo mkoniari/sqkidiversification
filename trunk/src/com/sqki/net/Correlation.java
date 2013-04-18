@@ -33,21 +33,23 @@ public class Correlation {
 		docIDmapName = docIDMN;
 		docIDmapRank = docIDMR;
 		ranKmapDocID = ranKMDID;
-		//docIDmapScore = normalise(docIDMS);
-		docIDmapScore=docIDMS;
+		docIDmapScore = normalise(docIDMS);
+		//docIDmapScore=docIDMS;
 		
 	}
 	private String[] windowString(String query, int docID, int windowSize) {
 
+		      
 		String[] doc = docIDmapTermVector.get(docID);
 		String finalDoc = " ";
 		String[] q = query.split(" ");
 
 		for (int i = 0; i < doc.length; i++) {
+			//System.err.println(doc[i]);
 			for (int j = 0; j < q.length; j++) {
 
 				if (q[j].equalsIgnoreCase(doc[i])) {
-					
+					//System.err.println("*");
 					int min=i - windowSize;
 					int max=i + windowSize;
 					if (min<0) min=0;
@@ -94,8 +96,11 @@ public class Correlation {
 					// For Windows Based Similarity Check
 					doc1=windowString(Main.getQuery(),documentID,wsz);
 					doc2=windowString(Main.getQuery(),ranKmapDocID.get(i-1),wsz);
+					
 					cosine= new Cosine(doc1, doc2);
+					
 					docSim=cosine.similarity();
+					
 					System.out.println(Main.topicNumber +" Q0 "+ docIDmapName.get(ranKmapDocID.get(i))+" "+i+" "+ docScorediff+" "+docSim +"  Correlation");
 					
 				}
