@@ -182,6 +182,7 @@ public class Retrieve {
 			finalList=scoreDifference.run();
 		}
 		if (Main.divMethod.equalsIgnoreCase("correlation")){
+			retrieveDocProp();
 			Correlation corr= new Correlation(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
 			corr.run();
 		}
