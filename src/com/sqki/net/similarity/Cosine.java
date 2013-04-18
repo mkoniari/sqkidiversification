@@ -2,6 +2,7 @@ package com.sqki.net.similarity;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class Cosine {
@@ -20,36 +21,43 @@ public class Cosine {
 	public double similarity() {
 
 		double cosineSim = 0d;
+		
 		double norm1 = euclideanDist(_doc1);
 		double norm2 = euclideanDist(_doc2);
 		
-		HashMap<String, Integer> doc1vector= new HashMap<String, Integer>();
-		HashMap<String, Integer> doc2vector= new HashMap<String, Integer>();
+		HashMap<String, Double> doc1vector= new HashMap<String, Double>();
+		HashMap<String, Double> doc2vector= new HashMap<String, Double>();
+		
 		doc1vector=docVector(_doc1);
-		//doc2vector=docVector(_doc2);
+		doc2vector=docVector(_doc2);
 		
-		
+//		
 		double sclar=0d;
-		for (int i = 0; i < _doc2.length; i++) {
-			if (doc1vector.containsKey(_doc2[i])) {
-			sclar=sclar+ weight(_doc2, _doc2[i])*doc1vector.get(_doc2[i]);	
-			}
-			
-		}
+//		for (int i = 0; i < _doc2.length; i++) {
+//			if (doc1vector.containsKey(_doc2[i])) {
+//				System.err.println(sclar);
+//			sclar=sclar+ weight(_doc2, _doc2[i])*doc1vector.get(_doc2[i]);	
+//			}
+//			
+//		}
 		
-		cosineSim=sclar/(norm1*norm2);
-		//System.err.println(cosineSim);
+		//cosineSim=sclar/(norm1*norm2);
+		cosineSim=cosine_similarity(doc1vector, doc2vector);
+		System.err.println(cosineSim + "*" +sclar +"*" + norm1 +"*"+ norm2);
+		
+		
 		return cosineSim;
 	}
-	private HashMap<String,Integer> docVector(String[] doc){
+	
+	private HashMap<String,Double> docVector(String[] doc){
 		
-		HashMap<String,Integer> vec= new HashMap<String, Integer>();
+		HashMap<String,Double> vec= new HashMap<String, Double>();
 		
 		for (int i = 0; i < doc.length; i++) {
 			if(vec.containsKey(doc[i])){
-				vec.put(doc[i], vec.get(doc[i])+1);
+				vec.put(doc[i], vec.get(doc[i])+1d);
 			}else {
-				vec.put(doc[i], 1);
+				vec.put(doc[i], 1d);
 			}
 		}
 		return vec;
@@ -73,10 +81,12 @@ public class Cosine {
 		double _eucDist = 0d;
 
 		for (int i = 0; i < _docTerms.length; i++) {
+			
 			_eucDist = _eucDist + Math.pow(weight(_docTerms, _docTerms[i]), 2);
 		}
+		
 		_eucDist = Math.sqrt(_eucDist);
-
+		System.err.println(_eucDist);
 		return _eucDist;
 	}
 
@@ -101,5 +111,17 @@ public class Cosine {
 		}
 		return w;
 	}
-
+	
+	static double cosine_similarity(Map<String, Double> v1, Map<String, Double> v2) {
+		Set<String> both=new HashSet<String>();
+		both = v1.keySet();
+        both.retainAll(v2.keySet());
+        double sclar = 0, norm1 = 0, norm2 = 0;
+        for (String k : both) sclar += v1.get(k) * v2.get(k);
+        for (String k : v1.keySet()) norm1 += v1.get(k) * v1.get(k);
+        for (String k : v2.keySet()) norm2 += v2.get(k) * v2.get(k);
+        //System.err.println(norm1 +" "+norm2);
+        return sclar / Math.sqrt(norm1 * norm2);
+}
+	
 }
