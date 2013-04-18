@@ -68,7 +68,12 @@ public class Cosine {
 		String cleanstr=""; 
 		for (int i = 0; i < doc.length; i++) {
 			
-			if (!doc[i].contains("[OOV]")) cleanstr=cleanstr+" "+doc[i];
+			if (doc[i].contains("[OOV]")) 
+			{
+				System.err.println(" FIND OOVVVVVV          ********");
+			}else{
+				cleanstr=cleanstr+" "+doc[i];
+			}
 		}
 		String[] cleanDoc=cleanstr.split(" ");
 		return cleanDoc;
