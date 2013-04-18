@@ -1,7 +1,7 @@
 #! /usr/bin/perl
 
 sub trim($);
-open (TP,"topic.trec") or die "cannot open trec topic file \n";
+open (TP,"topic.trec.stemmed") or die "cannot open trec topic file \n";
 while (my $l=<TP>){
         my $ll=trim($l);
         if ($ll=~/(\d+):(.*)/){
