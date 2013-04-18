@@ -37,6 +37,7 @@ public class Retrieve {
 	HashMap<Integer,Integer> docIDmapRunID= new HashMap<Integer, Integer>();
 	QueryEnvironment env = new QueryEnvironment();
 	ResultList nondiverse= new ResultList();
+	int ctfvalidity;
 
 	public Retrieve(String myIndex, int topicNumber, String resultFile) {
 
@@ -45,21 +46,29 @@ public class Retrieve {
 		_myIndex = myIndex;
 		_topicNumber = topicNumber;
 		_resultFile=resultFile;
+		//ReadResultFile readfile = new ReadResultFile(_resultFile,_topicNumber);
 	}
 
 	private void readResultFile(){
 		ReadResultFile readfile = new ReadResultFile(_resultFile,_topicNumber);
 		nondiverse=readfile.read();
+		ctfvalidity=readfile.Cut_off();
+		Main.setCuttoff(ctfvalidity);
 		//System.err.println("**"+nondiverse.getResultList().size());
 	}
 	private void retrieveDocProp() throws Exception {
 
 		env.addIndex(_myIndex);
         DocumentVector[] documentVector;
-        String[] names = new String[Main.cuttoff];
-        Double[] scores=new Double[Main.cuttoff];
-        int[] ranks= new int[Main.cuttoff];
-        int[] runids= new int[Main.cuttoff];
+        
+        // Some runs may contain less than cutff 
+        // So I changed the Main.Cuttoff with ctfvalidity
+       
+        String[] names = new String[ctfvalidity];
+        Double[] scores=new Double[ctfvalidity];
+        int[] ranks= new int[ctfvalidity];
+        int[] runids= new int[ctfvalidity];
+        
         
         // Assigning names to array
         for (int i = 0; i < nondiverse.getResultList().size(); i++) {
@@ -113,10 +122,15 @@ public class Retrieve {
 	}
 	
 	private void retrieveDocPropNoIndex(){
-		String[] names = new String[Main.cuttoff];
-        Double[] scores=new Double[Main.cuttoff];
-        int[] ranks= new int[Main.cuttoff];
-        int[] runids= new int[Main.cuttoff];
+//		String[] names = new String[Main.cuttoff];
+//        Double[] scores=new Double[Main.cuttoff];
+//        int[] ranks= new int[Main.cuttoff];
+//        int[] runids= new int[Main.cuttoff];
+        
+        String[] names = new String[ctfvalidity];
+        Double[] scores=new Double[ctfvalidity];
+        int[] ranks= new int[ctfvalidity];
+        int[] runids= new int[ctfvalidity];
         
         for (int i = 0; i < nondiverse.getResultList().size(); i++) {
 			names[i]=   nondiverse.getResultList().get(i).getDocName();

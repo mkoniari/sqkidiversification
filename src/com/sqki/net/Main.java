@@ -18,13 +18,13 @@ public class Main {
 	 */
 	//on Macbook
 	//MAC Index
-	static String myIndex="/Users/Research/research/Data/FT.Diversity.Index";
+	//static String myIndex="/Users/Research/research/Data/FT.Diversity.Index";
 	
 	//HOMEPC INDEX
 	//static String myIndex="/home/sqki/Dropbox/Research/IR/DATA/SAMPLE_CLUEWEB/index";
 	
 	//HPC index
- 	//static String myIndex="/scratch/sadegh/DATA/TRECDATA/CluewebCatBIndex-StopWordRemoval-WithDoc";
+ 	static String myIndex="/scratch/sadegh/DATA/TRECDATA/CluewebCatBIndex-StopWordRemoval-WithDoc";
 		
 	//Lighter HPC index about 167 G
 	//static String myIndex="/scratch/sadegh/DATA/TRECDATA/CluewebCatBIndex";
@@ -33,9 +33,9 @@ public class Main {
 	//static String myIndex="J:\\Sadegh-Personal\\research\\data\\FT.Diversity.Index";
 	//static int cuttoff=100;
 	static int cuttoff;
-	public static int getCuttoff() {
-		return cuttoff;
-	}
+	
+	
+	
 	static int topicNumber;
 	static double lambda;
 	static int windowSize;
@@ -99,4 +99,13 @@ public class Main {
 	public static double getLambda() {
 		return lambda;
 	}
+
+	public static int getCuttoff() {
+		return cuttoff;
+	}
+
+	public static void setCuttoff(int cuttoff) {
+		Main.cuttoff = cuttoff;
+	}
+	
 }
