@@ -7,6 +7,7 @@ do
 for w in {1..100}
 do
 qsub qsub-files/$i-mmr-$j-qsub-$w
+#qsub qsub-files/$1-mmr-$j-qsub-$w
 done
 done
 
