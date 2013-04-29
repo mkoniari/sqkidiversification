@@ -102,7 +102,11 @@ public class Correlation {
 					
 					docSim=cosine.similarity();
 					
-					System.out.println(Main.topicNumber +" Q0 "+ docIDmapName.get(ranKmapDocID.get(i))+" "+i+" "+ docScorediff+" "+docSim +"  Correlation");
+					int doc_id=ranKmapDocID.get(i);
+					
+					int doc_id_len=docIDmapTermVector.get(doc_id).length;
+					
+					System.out.println(Main.topicNumber +" Q0 "+ docIDmapName.get(ranKmapDocID.get(i))+" "+i+" "+ docScorediff+" "+docSim +"   "+doc_id_len);
 					
 				}
 				
