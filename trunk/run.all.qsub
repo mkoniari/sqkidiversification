@@ -4,11 +4,11 @@ do
 for i in {1..150}
 do
 
-for w in {1..100}
-do
-qsub qsub-files/$i-mmr-$j-qsub-$w
+#for w in {1..100}
+#do
+qsub qsub-files/$i-mmr-$j-qsub-1
 #qsub qsub-files/$1-mmr-$j-qsub-$w
-done
+#done
 done
 
 done
