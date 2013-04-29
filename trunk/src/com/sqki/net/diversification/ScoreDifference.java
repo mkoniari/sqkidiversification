@@ -38,9 +38,8 @@ public class ScoreDifference {
 		
 		docIDmapRank = docIDMR;
 		ranKmapDocID = ranKMDID;
-		
-		docIDmapScore = normalise(docIDMS);
-		//docIDmapScore=docIDMS;	
+		//docIDmapScore = normalise(docIDMS);
+		docIDmapScore=docIDMS;	
     }
 	
 	
@@ -93,12 +92,11 @@ public class ScoreDifference {
 	}
     public double diff(int docID, int docIDprevious){
     	
-    	double diff=0d;
+    	double difference=0d;
     	
-    	diff=reldiff(Math.abs(docIDmapScore.get(docID)),Math.abs(docIDmapScore.get(docIDprevious)));
+    	difference=reldiff(Math.abs(docIDmapScore.get(docID)),Math.abs(docIDmapScore.get(docIDprevious)));
     	
-    	
-    	return diff;
+    	return difference;
     }
     
     private void removedocID(int docid) {
@@ -143,9 +141,18 @@ public class ScoreDifference {
 	}
 	
 	public double reldiff(double fscore,double sscore){
-		System.err.println(fscore + " * "+ sscore );
 		double diff=0.0d;
+//		if (sscore < 0.00000000000001 && fscore < 0.000000000001) { 
+//			diff=0;
+//		}else {
 		diff=Math.abs((fscore-sscore)/sscore);
+//		}
+//		BigDecimal diff;;
+//		BigDecimal f= new BigDecimal(fscore);
+//		BigDecimal s= new BigDecimal(sscore);
+		
+		//diff=new BigDecimal((f.doubleValue()-s.doubleValue())/s.doubleValue());
+		//System.err.println(diff);
 		return diff;
 		
 	}
@@ -154,14 +161,9 @@ public class ScoreDifference {
 		// TODO Auto-generated method stub
 		HashMap<Integer,Double> normalScore= new HashMap<Integer,Double>();
 		
-		
 		double maxScore=docIDMS.get(ranKmapDocID.get(1));
 		double minScore=docIDMS.get(ranKmapDocID.get(ranKmapDocID.size()));
 		double normalizeScore=0d;
-		if(maxScore > 0){
-			normalScore=docIDMS;
-			
-		} else {
 		
 		//System.err.println(maxScore+" *"+ minScore + " * " + ranKmapDocID.size());
 		// add loop on 
@@ -175,12 +177,13 @@ public class ScoreDifference {
 
 		double val = (Double)entry.getValue();
 
-		normalizeScore=(val-minScore)/(maxScore-minScore);
+		normalizeScore=new BigDecimal((val-minScore)/(maxScore-minScore)).doubleValue();
+		//System.err.println(normalizeScore);
 		normalScore.put(key, normalizeScore);
 
 		}
 		
-		}
+		
 		
 		return normalScore;
 	}

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 
 import com.sqki.net.util.Result;
 import com.sqki.net.util.ResultList;
@@ -54,7 +55,9 @@ public class ReadResultFile {
 					result.setRank(Integer.parseInt(words[3]));
 					//System.err.println(words[2].trim());
 					result.setDocName(words[2].trim());
-					result.setScore(Double.valueOf(words[4].trim()).doubleValue());
+					result.setScore(Double.valueOf(words[4].trim()));
+//					BigDecimal sr= new BigDecimal(words[4].trim());
+//					result.setScore(sr.doubleValue());
 					checkTopicNumber(result.getDocName(), result.getScore());
 					resultList.add(result);
 					ctfvalidity++;

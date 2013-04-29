@@ -80,7 +80,7 @@ public class Main {
 		  
 //		  resultFile="baseline/result.okapi";
 //		  topicNumber=303;
-		  System.err.println(" Topic Number is : "+ topicNumber);
+		  System.err.println(" Result file is :  "+ resultFile +"  Topic Number is : "+ topicNumber);
 		  Retrieve retrieve= new Retrieve(myIndex, topicNumber, resultFile);
 		 // retrieve.checkToWork();
 		  PrintResult printResult= new PrintResult();
