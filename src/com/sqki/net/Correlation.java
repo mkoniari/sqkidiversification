@@ -90,7 +90,7 @@ public class Correlation {
 					//documents and the difference between two documents
 					//System.err.println(ranKmapDocID.size());
 					documentID=ranKmapDocID.get(i);
-					docScorediff=Math.abs(docIDmapScore.get(documentID)-docIDmapScore.get(ranKmapDocID.get(i-1)));
+					docScorediff=Math.abs((docIDmapScore.get(documentID)-docIDmapScore.get(ranKmapDocID.get(i-1)))/(docIDmapScore.get(ranKmapDocID.get(i-1))));
 					// For Orginal Document Similarity Check
 					doc1=docIDmapTermVector.get(documentID);
 					doc2=docIDmapTermVector.get(ranKmapDocID.get(i-1));
