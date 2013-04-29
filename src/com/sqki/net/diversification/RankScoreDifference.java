@@ -67,12 +67,7 @@ public class RankScoreDifference {
 		
 		//DEBUG
 		
-		
-		
-		
 		//Initializing a new object
-		
-		
 		
 		 Iterator it = docIDmapRank.entrySet().iterator();
 		    while (it.hasNext()) {
@@ -95,15 +90,11 @@ public class RankScoreDifference {
 		        
 			//	it.remove(); // avoids a ConcurrentModificationException
 		    }
-		  
 		    
 		    ResultList result= new ResultList();
 		    System.err.println("done...");
 		    result=sdff.run();
-		   
-
-		    
-		    
+				    
 		    for (int i = 0; i < result.getResultList().size(); i++) {
 				
 				int docid= result.getResultList().get(i).getDocID();
@@ -120,9 +111,6 @@ public class RankScoreDifference {
 //		
 //		HashMap<Integer, Integer> docIDmapDiffRank = new HashMap<Integer, Integer>();
 		
-		
-		
-		
 		sorting(docIDmapRankDiffScore);
 		
 		for (int i = 1; i <= Main.getCuttoff(); i++) {
@@ -134,9 +122,6 @@ public class RankScoreDifference {
 		
 	}
 
-	
-	
-	
 
 	private void put(int docID, int rank) {
 		Result tmpresult = new Result();

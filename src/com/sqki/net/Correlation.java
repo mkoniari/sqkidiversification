@@ -92,11 +92,11 @@ public class Correlation {
 					documentID=ranKmapDocID.get(i);
 					docScorediff=Math.abs(docIDmapScore.get(documentID)-docIDmapScore.get(ranKmapDocID.get(i-1)));
 					// For Orginal Document Similarity Check
-				//	doc1=docIDmapTermVector.get(documentID);
-				//	doc2=docIDmapTermVector.get(ranKmapDocID.get(i-1));
+					doc1=docIDmapTermVector.get(documentID);
+					doc2=docIDmapTermVector.get(ranKmapDocID.get(i-1));
 					// For Windows Based Similarity Check
-					doc1=windowString(Main.getQuery(),documentID,wsz);
-					doc2=windowString(Main.getQuery(),ranKmapDocID.get(i-1),wsz);
+				//	doc1=windowString(Main.getQuery(),documentID,wsz);
+				//	doc2=windowString(Main.getQuery(),ranKmapDocID.get(i-1),wsz);
 					
 					cosine= new Cosine(doc1, doc2);
 					
