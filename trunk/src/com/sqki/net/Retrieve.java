@@ -55,7 +55,8 @@ public class Retrieve {
 		nondiverse=readfile.read();
 		ctfvalidity=readfile.Cut_off();
 		Main.setCuttoff(ctfvalidity);
-		//System.err.println(ctfvalidity);
+		
+		System.err.println(ctfvalidity);
 		//System.err.println("**"+nondiverse.getResultList().size());
 	}
 	private void retrieveDocProp() throws Exception {
@@ -135,6 +136,7 @@ public class Retrieve {
         int[] runids= new int[ctfvalidity];
         
         for (int i = 0; i < nondiverse.getResultList().size(); i++) {
+        	
 			names[i]=   nondiverse.getResultList().get(i).getDocName();
 			scores[i]=  nondiverse.getResultList().get(i).getScore();
 			ranks[i]=   nondiverse.getResultList().get(i).getRank();
