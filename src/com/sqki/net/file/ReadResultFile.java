@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 
+import com.sqki.net.Main;
 import com.sqki.net.util.Result;
 import com.sqki.net.util.ResultList;
 
@@ -50,6 +51,7 @@ public class ReadResultFile {
 
 				if (_topicNumber == Integer.parseInt(words[0])) {
 					
+					if (ctfvalidity < Main.getCuttoff()){
 					Result result= new Result();
 					result.setTopicNumber(_topicNumber);
 					result.setRank(Integer.parseInt(words[3]));
@@ -60,7 +62,10 @@ public class ReadResultFile {
 //					result.setScore(sr.doubleValue());
 					checkTopicNumber(result.getDocName(), result.getScore());
 					resultList.add(result);
-					ctfvalidity++;
+					
+						ctfvalidity++;
+					}
+					
 				}
 			}
 			
