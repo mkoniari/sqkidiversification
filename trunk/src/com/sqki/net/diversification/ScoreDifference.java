@@ -62,7 +62,7 @@ public class ScoreDifference {
 				System.err.println("prevDocID :"+ prevDocID + " Current Doc ID:" + i);
 				cosine=new Cosine(docIDmapTermVector.get(i),docIDmapTermVector.get(prevDocID));
 				dif = diff(i, prevDocID)*cosine.similarity();
-			    dif=diff(i,prevDocID);
+			  //  dif=diff(i,prevDocID);
 			}
 			
 			docIDmapDiffScore.put(i, dif);
