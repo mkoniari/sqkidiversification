@@ -9,7 +9,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import com.sqki.net.Main;
-import com.sqki.net.similarity.Cosine;
 import com.sqki.net.util.Result;
 import com.sqki.net.util.ResultList;
 
@@ -27,7 +26,6 @@ public class ScoreDifference {
 	HashMap<Integer,Integer> docIDmapDiffRankSort=new HashMap<Integer, Integer>();
 	HashMap<Integer,Integer> docIDmapDiffRank=new HashMap<Integer, Integer>();
 	HashMap<Integer,Integer> ranKmapdocIDDiff=new HashMap<Integer, Integer>();
-	HashMap<Integer, String[]> docIDmapTermVector = new HashMap<Integer, String[]>();
 	
     public ScoreDifference(HashMap<Integer, String[]> docIDmapTV,
 			HashMap<Integer, String> docIDMN, HashMap<Integer, Double> docIDMS,
@@ -40,9 +38,9 @@ public class ScoreDifference {
 		
 		docIDmapRank = docIDMR;
 		ranKmapDocID = ranKMDID;
-		//docIDmapScore = normalise(docIDMS);
-		docIDmapScore=docIDMS;	
-		docIDmapTermVector=docIDmapTV;
+		
+		docIDmapScore = normalise(docIDMS);
+		//docIDmapScore=docIDMS;	
     }
 	
 	
@@ -52,14 +50,13 @@ public class ScoreDifference {
 		for (Integer i: docIDmapScore.keySet()){
 		    double dif=0.0d;
 			if (docIDmapRank.get(i) == 1) {
-			    dif=Math.abs(docIDmapScore.get(i)*10);
+			    dif=Math.abs(docIDmapScore.get(i)*100);
 				
 			}
 			if (docIDmapRank.get(i) > 1) {
 				int prevDocRank=docIDmapRank.get(i)-1;
 				int prevDocID=ranKmapDocID.get(prevDocRank);
-				Cosine cosine=new Cosine(docIDmapTermVector.get(i),docIDmapTermVector.get(prevDocID));
-				dif = diff(i, prevDocID)*cosine.similarity();
+				
 			    dif=diff(i,prevDocID);
 			}
 			
@@ -96,11 +93,12 @@ public class ScoreDifference {
 	}
     public double diff(int docID, int docIDprevious){
     	
-    	double difference=0d;
+    	double diff=0d;
     	
-    	difference=reldiff(Math.abs(docIDmapScore.get(docID)),Math.abs(docIDmapScore.get(docIDprevious)));
+    	diff=reldiff(Math.abs(docIDmapScore.get(docID)),Math.abs(docIDmapScore.get(docIDprevious)));
     	
-    	return difference;
+    	
+    	return diff;
     }
     
     private void removedocID(int docid) {
@@ -145,18 +143,9 @@ public class ScoreDifference {
 	}
 	
 	public double reldiff(double fscore,double sscore){
+		System.err.println(fscore + " * "+ sscore );
 		double diff=0.0d;
-//		if (sscore < 0.00000000000001 && fscore < 0.000000000001) { 
-//			diff=0;
-//		}else {
 		diff=Math.abs((fscore-sscore)/sscore);
-//		}
-//		BigDecimal diff;;
-//		BigDecimal f= new BigDecimal(fscore);
-//		BigDecimal s= new BigDecimal(sscore);
-		
-		//diff=new BigDecimal((f.doubleValue()-s.doubleValue())/s.doubleValue());
-		//System.err.println(diff);
 		return diff;
 		
 	}
@@ -165,9 +154,14 @@ public class ScoreDifference {
 		// TODO Auto-generated method stub
 		HashMap<Integer,Double> normalScore= new HashMap<Integer,Double>();
 		
+		
 		double maxScore=docIDMS.get(ranKmapDocID.get(1));
 		double minScore=docIDMS.get(ranKmapDocID.get(ranKmapDocID.size()));
 		double normalizeScore=0d;
+		if(maxScore > 0){
+			normalScore=docIDMS;
+			
+		} else {
 		
 		//System.err.println(maxScore+" *"+ minScore + " * " + ranKmapDocID.size());
 		// add loop on 
@@ -181,13 +175,12 @@ public class ScoreDifference {
 
 		double val = (Double)entry.getValue();
 
-		normalizeScore=new BigDecimal((val-minScore)/(maxScore-minScore)).doubleValue();
-		//System.err.println(normalizeScore);
+		normalizeScore=(val-minScore)/(maxScore-minScore);
 		normalScore.put(key, normalizeScore);
 
 		}
 		
-		
+		}
 		
 		return normalScore;
 	}
