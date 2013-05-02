@@ -201,6 +201,12 @@ public class Retrieve {
 			finalList=wmmr.run();
 		}
 		
+		if (Main.divMethod.equalsIgnoreCase("scorediffMean")){
+			retrieveDocPropNoIndex();
+			ScoreDifferenceMean differenceMean= new ScoreDifferenceMean(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
+			finalList=differenceMean.run();
+		}
+		
 		return finalList;
 	}
 

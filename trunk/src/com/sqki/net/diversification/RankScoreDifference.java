@@ -37,8 +37,8 @@ public class RankScoreDifference {
 	HashMap<Integer, Double> docIDmapRankDiffScoreAPP = new HashMap<Integer, Double>();
 	HashMap<Integer, String> docIDmapNameAPP = new HashMap<Integer, String>();
 
-	ScoreDifference sdff;
-	
+	//ScoreDifference sdff;
+	ScoreDifferenceMean sdff;
 	//Needs in sorting
 	HashMap<Integer, Double> docIDmapRankDiffScore = new HashMap<Integer, Double>();
 	HashMap<Integer, Integer> docIDmapDiffRankSort = new HashMap<Integer, Integer>();
@@ -58,9 +58,9 @@ public class RankScoreDifference {
 		ranKmapDocID = ranKMDID;
 		docIDmapScore = docIDMS;
 		
-		sdff= new ScoreDifference(docIDmapTV, docIDMN, docIDMS, docIDMR, ranKMDID);
+		//sdff= new ScoreDifference(docIDmapTV, docIDMN, docIDMS, docIDMR, ranKMDID);
 		
-		
+		sdff= new ScoreDifferenceMean(docIDmapTV, docIDMN, docIDMS, docIDMR, ranKMDID);
 	}
 
 	public ResultList run() {

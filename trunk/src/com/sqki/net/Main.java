@@ -46,8 +46,9 @@ public class Main {
 	
 	static String resultFile;
 	
-//	static String divMethod="scorediff";
-	static String divMethod="scorediffRank";
+	static String divMethod="scorediff";
+//	static String divMethod="scorediffRank";
+//	static String divMethod="scorediffMean";
 // 	static String divMethod="mmr";
 //	static String divMethod="correlation";
 //	static String divMethod="xquad";
@@ -69,6 +70,7 @@ public class Main {
 		 * arg 5 : query String	
 		 * arg 6: window size for correlation and window MMR
 		 */
+			
         // Parameter : topic result lambda
 		  topicNumber = Integer.parseInt(args[0]);
 		  resultFile=args[1];
@@ -90,9 +92,9 @@ public class Main {
 	}
 
 	// Getter and Setter to use the parameter
-		public static String getQuery() {
+	public static String getQuery() {
 			return query;
-		}
+	}
 	public static int getTopicNumber() {
 		return topicNumber;
 	}
