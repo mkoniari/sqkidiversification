@@ -1,20 +1,14 @@
 package com.sqki.net;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+
 
 import com.sqki.net.diversification.*;
 import com.sqki.net.file.ReadAspects;
 import com.sqki.net.file.ReadResultFile;
-
 import com.sqki.net.util.AspectsList;
-import com.sqki.net.util.Result;
 import com.sqki.net.util.ResultList;
-
 import lemurproject.indri.DocumentVector;
 import lemurproject.indri.QueryEnvironment;
 
