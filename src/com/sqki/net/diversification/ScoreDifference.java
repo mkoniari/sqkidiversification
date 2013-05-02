@@ -58,8 +58,8 @@ public class ScoreDifference {
 			if (docIDmapRank.get(i) > 1) {
 				int prevDocRank=docIDmapRank.get(i)-1;
 				int prevDocID=ranKmapDocID.get(prevDocRank);
-				Cosine cosine=new Cosine(docIDmapTermVector.get(i),docIDmapTermVector.get(prevDocID));
-				dif = diff(i, prevDocID)*cosine.similarity();
+				//Cosine cosine=new Cosine(docIDmapTermVector.get(i),docIDmapTermVector.get(prevDocID));
+				//dif = diff(i, prevDocID)*cosine.similarity();
 			    //dif=diff(i,prevDocID);
 			}
 			
