@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import com.sqki.net.Main;
+import com.sqki.net.similarity.Cosine;
 import com.sqki.net.util.Result;
 import com.sqki.net.util.ResultList;
 
@@ -26,6 +27,7 @@ public class ScoreDifference {
 	HashMap<Integer,Integer> docIDmapDiffRankSort=new HashMap<Integer, Integer>();
 	HashMap<Integer,Integer> docIDmapDiffRank=new HashMap<Integer, Integer>();
 	HashMap<Integer,Integer> ranKmapdocIDDiff=new HashMap<Integer, Integer>();
+	HashMap<Integer, String[]> docIDmapTermVector = new HashMap<Integer, String[]>();
 	
     public ScoreDifference(HashMap<Integer, String[]> docIDmapTV,
 			HashMap<Integer, String> docIDMN, HashMap<Integer, Double> docIDMS,
@@ -40,6 +42,7 @@ public class ScoreDifference {
 		ranKmapDocID = ranKMDID;
 		//docIDmapScore = normalise(docIDMS);
 		docIDmapScore=docIDMS;	
+		docIDmapTermVector=docIDmapTV;
     }
 	
 	
@@ -49,14 +52,15 @@ public class ScoreDifference {
 		for (Integer i: docIDmapScore.keySet()){
 		    double dif=0.0d;
 			if (docIDmapRank.get(i) == 1) {
-			    dif=Math.abs(docIDmapScore.get(i)*100);
+			    dif=Math.abs(docIDmapScore.get(i)*10);
 				
 			}
 			if (docIDmapRank.get(i) > 1) {
 				int prevDocRank=docIDmapRank.get(i)-1;
 				int prevDocID=ranKmapDocID.get(prevDocRank);
-				
-			    dif=diff(i,prevDocID);
+				Cosine cosine=new Cosine(docIDmapTermVector.get(i),docIDmapTermVector.get(prevDocID));
+				dif = diff(i, prevDocID)*cosine.similarity();
+			    //dif=diff(i,prevDocID);
 			}
 			
 			docIDmapDiffScore.put(i, dif);
