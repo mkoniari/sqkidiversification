@@ -174,7 +174,8 @@ public class Retrieve {
 			finalList=xquad.run();
 		}
 		if (Main.divMethod.equalsIgnoreCase("scorediff")){
-			retrieveDocPropNoIndex();
+			//retrieveDocPropNoIndex();
+			retrieveDocProp();
 			ScoreDifference scoreDifference= new ScoreDifference(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
 			finalList=scoreDifference.run();
 		}
@@ -196,7 +197,9 @@ public class Retrieve {
 		}
 		
 		if (Main.divMethod.equalsIgnoreCase("scorediffMean")){
+			
 			retrieveDocPropNoIndex();
+			
 			ScoreDifferenceMean differenceMean= new ScoreDifferenceMean(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
 			finalList=differenceMean.run();
 		}
