@@ -28,6 +28,7 @@ public class ScoreDifference {
 	HashMap<Integer,Integer> docIDmapDiffRank=new HashMap<Integer, Integer>();
 	HashMap<Integer,Integer> ranKmapdocIDDiff=new HashMap<Integer, Integer>();
 	HashMap<Integer, String[]> docIDmapTermVector = new HashMap<Integer, String[]>();
+	Cosine cosine;
 	
     public ScoreDifference(HashMap<Integer, String[]> docIDmapTV,
 			HashMap<Integer, String> docIDMN, HashMap<Integer, Double> docIDMS,
@@ -58,7 +59,8 @@ public class ScoreDifference {
 			if (docIDmapRank.get(i) > 1) {
 				int prevDocRank=docIDmapRank.get(i)-1;
 				int prevDocID=ranKmapDocID.get(prevDocRank);
-				Cosine cosine=new Cosine(docIDmapTermVector.get(i),docIDmapTermVector.get(prevDocID));
+				System.err.println("prevDocID :"+ prevDocID + " Current Doc ID:" + i);
+				cosine=new Cosine(docIDmapTermVector.get(i),docIDmapTermVector.get(prevDocID));
 				dif = diff(i, prevDocID)*cosine.similarity();
 			    dif=diff(i,prevDocID);
 			}
