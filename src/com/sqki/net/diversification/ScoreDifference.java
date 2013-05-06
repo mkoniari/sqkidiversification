@@ -37,34 +37,49 @@ public class ScoreDifference {
 		//TODO Constructor
 		
 		//docIDmapTermVector = docIDmapTV;
-		docIDmapName = docIDMN;
+//		docIDmapName = docIDMN;
+//		
+//		docIDmapRank = docIDMR;
+//		ranKmapDocID = ranKMDID;
+//		//docIDmapScore = normalise(docIDMS);
+//		docIDmapScore=docIDMS;	
+//		docIDmapTermVector=docIDmapTV;
 		
-		docIDmapRank = docIDMR;
-		ranKmapDocID = ranKMDID;
-		//docIDmapScore = normalise(docIDMS);
-		docIDmapScore=docIDMS;	
-		docIDmapTermVector=docIDmapTV;
+		//Cloning test - Shallow Copy
+		docIDmapName = (HashMap<Integer, String>) docIDMN.clone();
+		docIDmapRank = (HashMap<Integer, Integer>) docIDMR.clone();
+		ranKmapDocID = (HashMap<Integer, Integer>) ranKMDID.clone();
+		docIDmapScore=(HashMap<Integer, Double>) docIDMS.clone();	
+		docIDmapTermVector=(HashMap<Integer, String[]>) docIDmapTV.clone();
+		
+		//Deep Copy test
+		//TODO I should fix the object to match the integer and double things
+//		docIDmapName =  DeepCopy(docIDMN);
+//		docIDmapRank = (HashMap<Integer, Integer>) docIDMR.clone();
+//		ranKmapDocID = (HashMap<Integer, Integer>) ranKMDID.clone();
+//		docIDmapScore=(HashMap<Integer, Double>) docIDMS.clone();	
+//		docIDmapTermVector=(HashMap<Integer, String[]>) docIDmapTV.clone();
+		
     }
 	
 	
 	public ResultList run(){
 	
-		
-		for (Integer i: docIDmapScore.keySet()){
+				for (Integer i: docIDmapScore.keySet()){
 		    double dif=0.0d;
 			if (docIDmapRank.get(i) == 1) {
-			    dif=Math.abs(docIDmapScore.get(i)*10);
+			    dif=Math.abs(docIDmapScore.get(i));
 				
 			}
 			if (docIDmapRank.get(i) > 1) {
 				int prevDocRank=docIDmapRank.get(i)-1;
 				int prevDocID=ranKmapDocID.get(prevDocRank);
-				System.err.println("prevDocID :"+ prevDocID + " Current Doc ID:" + i);
-				cosine=new Cosine(docIDmapTermVector.get(i),docIDmapTermVector.get(prevDocID));
-				dif = diff(i, prevDocID)*cosine.similarity();
-			  //  dif=diff(i,prevDocID);
+				//System.err.println("prevDocID :"+ prevDocID + " Current Doc ID:" + i);
+				//cosine=new Cosine(docIDmapTermVector.get(i),docIDmapTermVector.get(prevDocID));
+				//dif = diff(i, prevDocID)*cosine.similarity();
+			    dif=diff(i,prevDocID)/Math.log(docIDmapRank.get(i));
 			}
-			
+			//System.err.println("Doc ID :"+ i + " Difference : " + dif);
 			docIDmapDiffScore.put(i, dif);
 		}
 		
@@ -100,8 +115,8 @@ public class ScoreDifference {
     	
     	double difference=0d;
     	
-    	difference=reldiff(Math.abs(docIDmapScore.get(docID)),Math.abs(docIDmapScore.get(docIDprevious)));
-    	
+    	//difference=reldiff(Math.abs(docIDmapScore.get(docID)),Math.abs(docIDmapScore.get(docIDprevious)));
+    	difference=absdiff(Math.abs(docIDmapScore.get(docID)),Math.abs(docIDmapScore.get(docIDprevious)));
     	return difference;
     }
     
@@ -148,17 +163,7 @@ public class ScoreDifference {
 	
 	public double reldiff(double fscore,double sscore){
 		double diff=0.0d;
-//		if (sscore < 0.00000000000001 && fscore < 0.000000000001) { 
-//			diff=0;
-//		}else {
 		diff=Math.abs((fscore-sscore)/sscore);
-//		}
-//		BigDecimal diff;;
-//		BigDecimal f= new BigDecimal(fscore);
-//		BigDecimal s= new BigDecimal(sscore);
-		
-		//diff=new BigDecimal((f.doubleValue()-s.doubleValue())/s.doubleValue());
-		//System.err.println(diff);
 		return diff;
 		
 	}
@@ -194,4 +199,23 @@ public class ScoreDifference {
 		return normalScore;
 	}
 
+	public HashMap<Object,Object> DeepCopy(HashMap<Object, Object> temp){
+		
+		HashMap<Object,Object> dc=new HashMap<Object,Object>();
+		
+		for (Object i: temp.keySet()){
+		    
+			Object key = new Object();
+			Object value = new Object();
+		    
+			key=i;
+		    value=temp.get(key);
+		    
+			dc.put(key, value);
+		   
+			
+		}
+		
+		return dc;
+	}
 }

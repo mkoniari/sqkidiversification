@@ -12,12 +12,12 @@ import com.sqki.net.util.ResultList;
 
 public class ReadAspects {
 
-	String _resultFile;
+	String _aspectFile;
 	int _topicNumber;
 	
-	public ReadAspects(String resultFile,int topicNumber) {
+	public ReadAspects(String aspectFile,int topicNumber) {
 				// TODO Auto-generated constructor stub
-		_resultFile=resultFile;
+		//_aspectFile=resultFile;
 		_topicNumber=topicNumber;
 	}
 	public AspectsList read() {
@@ -26,7 +26,7 @@ public class ReadAspects {
 		AspectsList aspectsList= new AspectsList();
 		aspectsList.setTopicNumber(_topicNumber);
 		try {
-			FileInputStream fstream = new FileInputStream(_resultFile);
+			FileInputStream fstream = new FileInputStream(_aspectFile);
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String strLine;

@@ -69,10 +69,10 @@ public class Retrieve {
         
         // Assigning names to array
         for (int i = 0; i < nondiverse.getResultList().size(); i++) {
-			names[i]=   nondiverse.getResultList().get(i).getDocName();
-			scores[i]=  nondiverse.getResultList().get(i).getScore();
-			ranks[i]=   nondiverse.getResultList().get(i).getRank();
-			runids[i]=   nondiverse.getResultList().get(i).getRank();
+			names[i]  =  nondiverse.getResultList().get(i).getDocName();
+			scores[i] =  nondiverse.getResultList().get(i).getScore();
+			ranks[i]  =  nondiverse.getResultList().get(i).getRank();
+			runids[i] =  nondiverse.getResultList().get(i).getRank();
 			
 		}
         
@@ -174,11 +174,19 @@ public class Retrieve {
 			finalList=xquad.run();
 		}
 		if (Main.divMethod.equalsIgnoreCase("scorediff")){
-			//retrieveDocPropNoIndex();
-			retrieveDocProp();
+			retrieveDocPropNoIndex();
+			//retrieveDocProp();
 			ScoreDifference scoreDifference= new ScoreDifference(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
 			finalList=scoreDifference.run();
 		}
+		
+		if (Main.divMethod.equalsIgnoreCase("rankscoredifference")){
+			retrieveDocPropNoIndex();
+			ScoreDiff scoreDiff= new ScoreDiff(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
+			finalList=scoreDiff.run();
+			
+		}
+		
 		if (Main.divMethod.equalsIgnoreCase("correlation")){
 			retrieveDocProp();
 			Correlation corr= new Correlation(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
@@ -204,6 +212,22 @@ public class Retrieve {
 			finalList=differenceMean.run();
 		}
 		
+		if (Main.divMethod.equalsIgnoreCase("RankSCD")){
+			
+			ResultList tempList= new ResultList();
+			retrieveDocPropNoIndex();
+			ScoreDifference scoreDifference= new ScoreDifference(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
+			tempList=scoreDifference.run();
+			RankSCD rankSCD= new RankSCD(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID,tempList);
+			finalList=rankSCD.run();
+		}	
+		if (Main.divMethod.equalsIgnoreCase("RandomRank")){
+			
+			retrieveDocPropNoIndex();
+			RandomRANK rrank= new RandomRANK(docIDmapTermVector, docIDmapName, docIDmapScore, docIDmapRank, ranKmapDocID);
+			finalList=rrank.run();
+		}		
+
 		return finalList;
 	}
 
