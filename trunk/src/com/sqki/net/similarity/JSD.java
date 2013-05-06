@@ -31,38 +31,47 @@ public class JSD {
 	public double similarity(){
 		
 		
-		for (int i = 0; i < _doc1.length; i++) {
-			int TF=termFrequency(_doc1,_doc1[i]);
-			
-			doc1TF.put(_doc1[i], TF);
-			
-		}
 		
 		for (int i = 0; i < _doc1.length; i++) {
 			int TF=termFrequency(_doc1,_doc1[i]);
 			doc1TF.put(_doc1[i], TF);
+			
 		}
+		
+		
+		
+		for (int i = 0; i < _doc2.length; i++) {
+			int TF=termFrequency(_doc2,_doc2[i]);
+			doc2TF.put(_doc2[i], TF);
+		}
+		
 		
 		//Language model for each document
 		for (String key : doc1TF.keySet()) {
 		
-			double value=(doc1TF.get(key))/doc1TF.size();
+			double value=doc1TF.get(key)/Double.valueOf(doc1TF.size());
 			doc1NV.put(key, value);
 		}
 		
+		
 		for (String key : doc2TF.keySet()) {
 			
-			double value=(doc2TF.get(key))/doc2TF.size();
+			double value=(doc2TF.get(key))/Double.valueOf(doc2TF.size());
 			doc2NV.put(key, value);
 		}
+		
+		
 		
 		// M Vector
 		
 		MVector=createM(doc1NV, doc2NV);
 		
+		
+		
 		// Calculate the KL Divergence
 		
 		double kld_doc1=KLD(MVector,doc1NV);
+		
 		double kld_doc2=KLD(MVector,doc2NV);
 		
 		double jsd=0.5*kld_doc1 +0.5*kld_doc2;
@@ -73,9 +82,15 @@ public class JSD {
 	public double KLD(HashMap<String, Double> M, HashMap<String,Double> document){
 		
 		double sum=0d;
+		
 		for (String key : document.keySet()){
+			
+			double part1=document.get(key);
+			double part2=document.get(key)/M.get(key);
+			//System.err.println( "part 1: "+ part1 + " part 2: "+part2);
 			sum=sum+(document.get(key) * (Math.log(document.get(key)/M.get(key))));
 		}
+		
 		return sum;
 	}
 	public HashMap<String, Double> createM(HashMap<String, Double> s1, HashMap<String, Double> s2){
@@ -99,6 +114,8 @@ public class JSD {
 			temp.put(key, value);
 			
 		}
+		
+		
 		
 		for (String key : s2.keySet()) {
 			
@@ -136,9 +153,10 @@ public class JSD {
 		for (int i = 0; i < doc.length; i++) {
 
 			if (doc[i].contains("[OOV]")) {
-				System.err.println(" FIND OOVVVVVV          ********");
+				//System.err.println(" FIND OOVVVVVV          ********");
 			} else {
 				cleanstr = cleanstr + " " + doc[i];
+				//System.err.println(doc[i]);
 			}
 		}
 		String[] cleanDoc = cleanstr.split(" ");
