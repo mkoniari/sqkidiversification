@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import com.sqki.net.similarity.Cosine;
+import com.sqki.net.similarity.JSD;
 import com.sqki.net.util.Result;
 import com.sqki.net.util.ResultList;
 
@@ -98,9 +99,13 @@ public class Correlation {
 				//	doc1=windowString(Main.getQuery(),documentID,wsz);
 				//	doc2=windowString(Main.getQuery(),ranKmapDocID.get(i-1),wsz);
 					
-					cosine= new Cosine(doc1, doc2);
+					//cosine= new Cosine(doc1, doc2);
 					
-					docSim=cosine.similarity();
+					//docSim=cosine.similarity();
+					
+					// Jensen - Shanon similarity
+					JSD jsd= new JSD(doc1, doc2);
+					docSim=jsd.similarity();
 					
 					int doc_id=ranKmapDocID.get(i);
 					

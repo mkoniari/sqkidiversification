@@ -8,6 +8,7 @@ import java.util.Set;
 
 import com.sqki.net.Main;
 import com.sqki.net.similarity.Cosine;
+import com.sqki.net.similarity.JSD;
 import com.sqki.net.util.Result;
 import com.sqki.net.util.ResultList;
 
@@ -137,6 +138,11 @@ public class MMR {
 		String[] query = q.split(" ");
 		Cosine cosine= new Cosine(query, docIDmapTermVector.get(docID2));
 		sim=cosine.similarity();
+		
+		// Jensen-Shanon Divergence test
+//		JSD jsd= new JSD(query,docIDmapTermVector.get(docID2));
+//		jsd.similarity();
+		
 		return sim;
 	}
 	private double mmrScore(double sim, double disim) {
