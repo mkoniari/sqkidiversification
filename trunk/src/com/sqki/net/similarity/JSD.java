@@ -49,14 +49,14 @@ public class JSD {
 		//Language model for each document
 		for (String key : doc1TF.keySet()) {
 		
-			double value=doc1TF.get(key)/Double.valueOf(doc1TF.size());
+			double value=doc1TF.get(key)/Double.valueOf(_doc1.length);
 			doc1NV.put(key, value);
 		}
 		
 		
 		for (String key : doc2TF.keySet()) {
 			
-			double value=(doc2TF.get(key))/Double.valueOf(doc2TF.size());
+			double value=(doc2TF.get(key))/Double.valueOf(_doc2.length);
 			doc2NV.put(key, value);
 		}
 		
@@ -88,11 +88,13 @@ public class JSD {
 			double part1=document.get(key);
 			double part2=document.get(key)/M.get(key);
 			//System.err.println( "part 1: "+ part1 + " part 2: "+part2);
-			sum=sum+(document.get(key) * (Math.log(document.get(key)/M.get(key))));
+			sum=sum+(document.get(key) * (Math.log10(document.get(key)/M.get(key))));
+			System.err.println((document.get(key) * (Math.log10(document.get(key)/M.get(key)))));
 		}
 		
 		return sum;
 	}
+
 	public HashMap<String, Double> createM(HashMap<String, Double> s1, HashMap<String, Double> s2){
 		
 		HashMap<String , Double> temp=new HashMap<String, Double>();
@@ -163,3 +165,4 @@ public class JSD {
 		return cleanDoc;
 	}
 }
+
