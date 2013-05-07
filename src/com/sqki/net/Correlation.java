@@ -34,8 +34,8 @@ public class Correlation {
 		docIDmapName = docIDMN;
 		docIDmapRank = docIDMR;
 		ranKmapDocID = ranKMDID;
-		docIDmapScore = normalise(docIDMS);
-		//docIDmapScore=docIDMS;
+		//docIDmapScore = normalise(docIDMS);
+		docIDmapScore=docIDMS;
 		
 	}
 	private String[] windowString(String query, int docID, int windowSize) {
@@ -91,7 +91,11 @@ public class Correlation {
 					//documents and the difference between two documents
 					//System.err.println(ranKmapDocID.size());
 					documentID=ranKmapDocID.get(i);
-					docScorediff=Math.abs((docIDmapScore.get(documentID)-docIDmapScore.get(ranKmapDocID.get(i-1)))/(docIDmapScore.get(ranKmapDocID.get(i-1))));
+					
+					double current_doc_score=docIDmapScore.get(documentID);
+					double prev_doc_score=docIDmapScore.get(ranKmapDocID.get(i-1));
+					
+					docScorediff=Math.abs(prev_doc_score-current_doc_score)/Math.abs(prev_doc_score);
 					// For Orginal Document Similarity Check
 					doc1=docIDmapTermVector.get(documentID);
 					doc2=docIDmapTermVector.get(ranKmapDocID.get(i-1));
