@@ -1,0 +1,1 @@
+An implementation of various method in search result diversification
